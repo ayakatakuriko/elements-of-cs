@@ -1,0 +1,57 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux8Way16.hdl
+
+/**
+ * 8-way 16-bit multiplexor:
+ * out = a if sel == 000
+ *       b if sel == 001
+ *       etc.
+ *       h if sel == 111
+ */
+
+CHIP Mux8Way16 {
+    IN a[16], b[16], c[16], d[16],
+       e[16], f[16], g[16], h[16],
+       sel[3];
+    OUT out[16];
+
+    PARTS:
+    Not(in=sel[2], out=s0not);
+    Not(in=sel[1], out=s1not);
+    Not(in=sel[0], out=s2not);
+
+    And(a=s1not, b=s2not, out=s1);
+    And(a=s1not, b=sel[0], out=s2);
+    And(a=sel[1], b=s2not, out=s3);
+    And(a=sel[1], b=sel[0], out=s4);
+
+    And(a=s0not, b=s1, out=sa);
+    And(a=s0not, b=s2, out=sb);
+    And(a=s0not, b=s3, out=sc);
+    And(a=s0not, b=s4, out=sd);
+    And(a=sel[2], b=s1, out=se);
+    And(a=sel[2], b=s2, out=sf);
+    And(a=sel[2], b=s3, out=sg);
+    And(a=sel[2], b=s4, out=sh);
+
+    And16(a[0..15]=a[0..15], b[0]=sa, b[1]=sa, b[2]=sa, b[3]=sa, b[4]=sa, b[5]=sa, b[6]=sa, b[7]=sa, b[8]=sa, b[9]=sa, b[10]=sa, b[11]=sa, b[12]=sa, b[13]=sa, b[14]=sa, b[15]=sa, out[0..15]=aout);
+    And16(a[0..15]=b[0..15], b[0]=sb, b[1]=sb, b[2]=sb, b[3]=sb, b[4]=sb, b[5]=sb, b[6]=sb, b[7]=sb, b[8]=sb, b[9]=sb, b[10]=sb, b[11]=sb, b[12]=sb, b[13]=sb, b[14]=sb, b[15]=sb, out[0..15]=bout);
+    And16(a[0..15]=c[0..15], b[0]=sc, b[1]=sc, b[2]=sc, b[3]=sc, b[4]=sc, b[5]=sc, b[6]=sc, b[7]=sc, b[8]=sc, b[9]=sc, b[10]=sc, b[11]=sc, b[12]=sc, b[13]=sc, b[14]=sc, b[15]=sc, out[0..15]=cout);
+    And16(a[0..15]=d[0..15], b[0]=sd, b[1]=sd, b[2]=sd, b[3]=sd, b[4]=sd, b[5]=sd, b[6]=sd, b[7]=sd, b[8]=sd, b[9]=sd, b[10]=sd, b[11]=sd, b[12]=sd, b[13]=sd, b[14]=sd, b[15]=sd, out[0..15]=dout);
+    And16(a[0..15]=e[0..15], b[0]=se, b[1]=se, b[2]=se, b[3]=se, b[4]=se, b[5]=se, b[6]=se, b[7]=se, b[8]=se, b[9]=se, b[10]=se, b[11]=se, b[12]=se, b[13]=se, b[14]=se, b[15]=se, out[0..15]=eout);
+    And16(a[0..15]=f[0..15], b[0]=sf, b[1]=sf, b[2]=sf, b[3]=sf, b[4]=sf, b[5]=sf, b[6]=sf, b[7]=sf, b[8]=sf, b[9]=sf, b[10]=sf, b[11]=sf, b[12]=sf, b[13]=sf, b[14]=sf, b[15]=sf, out[0..15]=fout);
+    And16(a[0..15]=g[0..15], b[0]=sg, b[1]=sg, b[2]=sg, b[3]=sg, b[4]=sg, b[5]=sg, b[6]=sg, b[7]=sg, b[8]=sg, b[9]=sg, b[10]=sg, b[11]=sg, b[12]=sg, b[13]=sg, b[14]=sg, b[15]=sg, out[0..15]=gout);
+    And16(a[0..15]=h[0..15], b[0]=sh, b[1]=sh, b[2]=sh, b[3]=sh, b[4]=sh, b[5]=sh, b[6]=sh, b[7]=sh, b[8]=sh, b[9]=sh, b[10]=sh, b[11]=sh, b[12]=sh, b[13]=sh, b[14]=sh, b[15]=sh, out[0..15]=hout);
+
+    Or16(a[0..15]=aout, b[0..15]=bout, out[0..15]=about);
+    Or16(a[0..15]=cout, b[0..15]=dout, out[0..15]=cdout);
+    Or16(a[0..15]=eout, b[0..15]=fout, out[0..15]=efout);
+    Or16(a[0..15]=gout, b[0..15]=hout, out[0..15]=ghout);
+
+    Or16(a[0..15]=about, b[0..15]=cdout, out[0..15]=out1);
+    Or16(a[0..15]=efout, b[0..15]=ghout, out[0..15]=out2);
+
+    Or16(a[0..15]=out1, b[0..15]=out2, out[0..15]=out);
+}
