@@ -1,0 +1,15 @@
+/**
+ *  入力flagが1のとき、入力in[16]を反転させる
+ */
+
+ CHIP Inv16 {
+     IN
+         flag,
+         in[16];
+     OUT
+         out[16];
+
+     PARTS:
+         Not16(in=in, out=inv);
+         Mux16(sel=flag, a=in, b=inv, out=out);
+}
