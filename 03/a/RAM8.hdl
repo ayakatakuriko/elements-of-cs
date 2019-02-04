@@ -5,8 +5,8 @@
 
 /**
  * Memory of 8 registers, each 16 bit-wide. Out holds the value
- * stored at the memory location specified by address. If load==1, then 
- * the in value is loaded into the memory location specified by address 
+ * stored at the memory location specified by address. If load==1, then
+ * the in value is loaded into the memory location specified by address
  * (the loaded value will be emitted to out from the next time step onward).
  */
 
@@ -15,5 +15,47 @@ CHIP RAM8 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Not(in=load, out=linv);
+    Or(a=load, b=linv, out=one);
+    Not(in=one, out=zero);
+    // r0~r7のどれにアクセスするのか
+    // rn=1のものにアクセス
+    DMux8Way(sel=address, in=one, a=r0, b=r1, c=r2, d=r3, e=r4, f=r5, g=r6, h=r7);
+    DMux8Way(sel=address, in=load, a=l0, b=l1, c=l2, d=l3, e=l4, f=l5, g=l6, h=l7);
+
+    Register(in=in , load=l0 , out=d0);
+    Register(in=in , load=l1 , out=d1);
+    Register(in=in , load=l2 , out=d2);
+    Register(in=in , load=l3 , out=d3);
+    Register(in=in , load=l4 , out=d4);
+    Register(in=in , load=l5 , out=d5);
+    Register(in=in , load=l6 , out=d6);
+    Register(in=in , load=l7 , out=d7);
+
+    Not(in=r0, out=ri0);
+    Not(in=r1, out=ri1);
+    Not(in=r2, out=ri2);
+    Not(in=r3, out=ri3);
+    Not(in=r4, out=ri4);
+    Not(in=r5, out=ri5);
+    Not(in=r6, out=ri6);
+    Not(in=r7, out=ri7);
+
+    Zeros16(flag=ri0, in=d0, out=o0);
+    Zeros16(flag=ri1, in=d1, out=o1);
+    Zeros16(flag=ri2, in=d2, out=o2);
+    Zeros16(flag=ri3, in=d3, out=o3);
+    Zeros16(flag=ri4, in=d4, out=o4);
+    Zeros16(flag=ri5, in=d5, out=o5);
+    Zeros16(flag=ri6, in=d6, out=o6);
+    Zeros16(flag=ri7, in=d7, out=o7);
+
+    Add16(a=o0, b=o1, out=x0);
+    Add16(a=o2, b=o3, out=x2);
+    Add16(a=o4, b=o5, out=x4);
+    Add16(a=o6, b=o7, out=x6);
+
+    Add16(a=x0, b=x2, out=y0);
+    Add16(a=x4, b=x6, out=y1);
+    Add16(a=y0, b=y1, out=out);
 }
