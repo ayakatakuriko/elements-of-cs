@@ -1,0 +1,32 @@
+/**
+ *  入力flagが1のとき、入力in[16]を0にする
+ */
+
+ CHIP Zeros16 {
+     IN
+         flag,
+         in[16];
+     OUT
+         out[16];
+
+     PARTS:
+     //flag=1ならo1は反転したin
+         Not(in=flag, out=fnot);
+         And16(a=in, b[0]=fnot,
+                     b[1]=fnot,
+                     b[2]=fnot,
+                     b[3]=fnot,
+                     b[4]=fnot,
+                     b[5]=fnot,
+                     b[6]=fnot,
+                     b[7]=fnot,
+                     b[8]=fnot,
+                     b[9]=fnot,
+                     b[10]=fnot,
+                     b[11]=fnot,
+                     b[12]=fnot,
+                     b[13]=fnot,
+                     b[14]=fnot,
+                     b[15]=fnot,
+                     out=out);
+}

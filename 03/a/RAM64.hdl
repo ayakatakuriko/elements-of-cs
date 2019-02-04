@@ -5,8 +5,8 @@
 
 /**
  * Memory of 64 registers, each 16 bit-wide. Out holds the value
- * stored at the memory location specified by address. If load==1, then 
- * the in value is loaded into the memory location specified by address 
+ * stored at the memory location specified by address. If load==1, then
+ * the in value is loaded into the memory location specified by address
  * (the loaded value will be emitted to out from the next time step onward).
  */
 
@@ -15,5 +15,47 @@ CHIP RAM64 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Not(in=load, out=linv);
+    Or(a=load, b=linv, out=one);
+    Not(in=one, out=zero);
+    // r80~r87のどれにアクセスするのか
+    // r8n=1のものにアクセス
+    DMux8Way(sel=address[3..5], in=one, a=r80, b=r81, c=r82, d=r83, e=r84, f=r85, g=r86, h=r87);
+    DMux8Way(sel=address[3..5], in=load, a=l0, b=l1, c=l2, d=l3, e=l4, f=l5, g=l6, h=l7);
+
+    RAM8(in=in, load=l0, address=address[0..2], out=d0);
+    RAM8(in=in, load=l1, address=address[0..2], out=d1);
+    RAM8(in=in, load=l2, address=address[0..2], out=d2);
+    RAM8(in=in, load=l3, address=address[0..2], out=d3);
+    RAM8(in=in, load=l4, address=address[0..2], out=d4);
+    RAM8(in=in, load=l5, address=address[0..2], out=d5);
+    RAM8(in=in, load=l6, address=address[0..2], out=d6);
+    RAM8(in=in, load=l7, address=address[0..2], out=d7);
+
+    Not(in=r80, out=ri0);
+    Not(in=r81, out=ri1);
+    Not(in=r82, out=ri2);
+    Not(in=r83, out=ri3);
+    Not(in=r84, out=ri4);
+    Not(in=r85, out=ri5);
+    Not(in=r86, out=ri6);
+    Not(in=r87, out=ri7);
+
+    Zeros16(flag=ri0, in=d0, out=o0);
+    Zeros16(flag=ri1, in=d1, out=o1);
+    Zeros16(flag=ri2, in=d2, out=o2);
+    Zeros16(flag=ri3, in=d3, out=o3);
+    Zeros16(flag=ri4, in=d4, out=o4);
+    Zeros16(flag=ri5, in=d5, out=o5);
+    Zeros16(flag=ri6, in=d6, out=o6);
+    Zeros16(flag=ri7, in=d7, out=o7);
+
+    Add16(a=o0, b=o1, out=x0);
+    Add16(a=o2, b=o3, out=x2);
+    Add16(a=o4, b=o5, out=x4);
+    Add16(a=o6, b=o7, out=x6);
+
+    Add16(a=x0, b=x2, out=y0);
+    Add16(a=x4, b=x6, out=y1);
+    Add16(a=y0, b=y1, out=out);
 }
