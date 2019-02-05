@@ -93,6 +93,6 @@ class Code {
     }
 
     public String jump(String mnemonic) {
-        return compMap.get(mnemonic);
+        return jumpMap.get(mnemonic);
     }
 }

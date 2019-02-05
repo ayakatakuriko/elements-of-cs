@@ -21,6 +21,20 @@ public class Assembler {
         }
     }
 
+    public void convertToAssemble() {
+        if (!parser.hasMoreCommands()) return;
+        do {
+            parser.advance();
+            addCode();
+        } while (parser.hasMoreCommands());
+        parser.closeFile();
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Write a line of binary code into output file.
      * You have to check there are any assemble code to read before call
@@ -49,6 +63,10 @@ public class Assembler {
         try {
             int value = Integer.parseInt(parser.symbol());
             code = Integer.toBinaryString(value);
+
+            while (code.length() < 16) {
+                code = "0" + code;
+            }
         } catch (java.lang.NumberFormatException e) {
             // symbol is not value
             // TODO
@@ -60,6 +78,10 @@ public class Assembler {
     private String cCommand() {
         return "111" + this.code.comp(parser.comp()) +
                 this.code.dest(parser.dest()) + this.code.jump(parser.jump());
+    }
+
+    private void lCommand() {
+        // TODO
     }
 
     private void writeCommand(String code) {
@@ -81,5 +103,10 @@ public class Assembler {
         sb.insert(8, " ");
         sb.insert(4, " ");
         return sb.toString();
+    }
+
+    public static void main (String args []) {
+        Assembler as = new Assembler(args[0]);
+        as.convertToAssemble();
     }
 }

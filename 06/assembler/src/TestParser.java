@@ -16,7 +16,7 @@ public class TestParser {
         // crr=D=M
         assertEquals("D", p.dest());
         assertEquals("M", p.comp());
-        assertEquals(null, p.jump());
+        assertEquals("", p.jump());
         p.advance();
         p.advance();
         // crr = D=D-M
