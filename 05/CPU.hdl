@@ -6,23 +6,23 @@
 /**
  * The Hack CPU (Central Processing unit), consisting of an ALU,
  * two registers named A and D, and a program counter named PC.
- * The CPU is designed to fetch and execute instructions written in 
+ * The CPU is designed to fetch and execute instructions written in
  * the Hack machine language. In particular, functions as follows:
- * Executes the inputted instruction according to the Hack machine 
+ * Executes the inputted instruction according to the Hack machine
  * language specification. The D and A in the language specification
  * refer to CPU-resident registers, while M refers to the external
- * memory location addressed by A, i.e. to Memory[A]. The inM input 
- * holds the value of this location. If the current instruction needs 
- * to write a value to M, the value is placed in outM, the address 
- * of the target location is placed in the addressM output, and the 
- * writeM control bit is asserted. (When writeM==0, any value may 
- * appear in outM). The outM and writeM outputs are combinational: 
- * they are affected instantaneously by the execution of the current 
- * instruction. The addressM and pc outputs are clocked: although they 
- * are affected by the execution of the current instruction, they commit 
- * to their new values only in the next time step. If reset==1 then the 
- * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather 
- * than to the address resulting from executing the current instruction. 
+ * memory location addressed by A, i.e. to Memory[A]. The inM input
+ * holds the value of this location. If the current instruction needs
+ * to write a value to M, the value is placed in outM, the address
+ * of the target location is placed in the addressM output, and the
+ * writeM control bit is asserted. (When writeM==0, any value may
+ * appear in outM). The outM and writeM outputs are combinational:
+ * they are affected instantaneously by the execution of the current
+ * instruction. The addressM and pc outputs are clocked: although they
+ * are affected by the execution of the current instruction, they commit
+ * to their new values only in the next time step. If reset==1 then the
+ * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather
+ * than to the address resulting from executing the current instruction.
  */
 
 CHIP CPU {
@@ -34,10 +34,63 @@ CHIP CPU {
                          // the current program (reset==0).
 
     OUT outM[16],        // M value output
-        writeM,          // Write to M? 
+        writeM,          // Write to M?
         addressM[15],    // Address in data memory (of M)
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    Not(in=reset, out=inv);
+    And(a=reset, b=inv, out=zero);
+    Not(in=zero, out=one);
+
+    //instruction[15]はA命令なら0、C命令なら1
+    //A命令なら下15ビットを、そうでなければoutMをAレジスタに向けて出力
+    Mux16(sel=instruction[15], a[15]=zero, a[0..14]=instruction[0..14], b=oM, out=toA);
+
+    //C命令かつinstruction[5]=1ならAレジスタに書き込む
+    And(a=instruction[15], b=instruction[5], out=cLoadA);
+    //A命令ならAレジスタに必ず書き込む
+    Not(in=instruction[15], out=inv15);
+    Or(a=cLoadA, b=inv15, out=loadA);
+    ARegister(in=toA, load=loadA, out=A, out[0..14]=addressM);
+
+    //A命令,もしくはC命令かつinstruction[12]=0ならA,そうでなければMを(このときtemp=1)ALUにむけて出力
+    And(a=instruction[15], b=instruction[12], out=temp);
+    Mux16(sel=temp, a=A, b=inM, out=toALU);
+
+    //C命令かつinstruction[4]=1ならDレジスタに書き込む
+    And(a=instruction[15], b=instruction[4], out=loadD);
+    DRegister(in=oM, load=loadD, out=D);
+
+    //ALUではC命令の場合のみを考えている。そのため、A命令の際には不正な値が出力される。
+    ALU(x=D, y=toALU, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out=oM, zr=zr, ng=ng);
+
+    //C命令かつinstruction[3]=1ならwriteM=1
+    And(a=instruction[15], b=instruction[3], out=writeM);
+
+    //C命令ならjumpについて判定
+    Not(in=zr, out=zrinv);
+    Not(in=ng, out=nginv);
+    Not(in=instruction[2], out=j1inv);
+    And(a=instruction[0], b=zrinv, out=o1);
+    And(a=zrinv, b=ng, out=o2);
+    And(a=instruction[1], b=zr, out=o3);
+    Or(a=o1, b=o2, out=oo1);
+    Or(a=o3, b=oo1, out=oo2);
+    And(a=oo2, b=instruction[2], out=j11);
+
+    And(a=instruction[1], b=instruction[0], out=t1);
+    And(a=t1, b=nginv, out=o4);
+    And(a=instruction[0], b=zrinv, out=t2);
+    And(a=t2, b=nginv, out=o5);
+    Not(in=instruction[0], out=j3inv);
+    And(a=instruction[1], b=j3inv, out=t3);
+    And(a=t3, b=zr, out=o6);
+    Or(a=o4, b=o5, out=oo3);
+    Or(a=o6, b=oo3, out=oo4);
+    And(a=oo4, b=j1inv, out=j10);
+    Or(a=j11, b=j10, out=jtemp);
+    And(a=instruction[15], b=jtemp, out=jmp);
+
+    PC(in=A, load=jmp, inc=one, reset=reset, out[0..14]=pc);
 }
