@@ -11,10 +11,10 @@ import java.io.IOException;
  * @data 2019/02/05
  */
 
-public class Parser {
-    private final int A_COMMAND = 100;
-    private final int C_COMMAND = 200;
-    private final int L_COMMAND = 300;
+class Parser {
+    static final int A_COMMAND = 100;
+    static final int C_COMMAND = 200;
+    static final int L_COMMAND = 300;
     private File inputFile;
     private BufferedReader br;
     private String next;
@@ -110,5 +110,13 @@ public class Parser {
                 !this.crr.contains(";")) return null;
 
         return crr.substring(crr.indexOf(";") + 1, crr.length());
+    }
+
+    public void closeFile() {
+        try {
+            br.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
