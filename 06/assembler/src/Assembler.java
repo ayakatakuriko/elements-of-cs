@@ -8,10 +8,16 @@ public class Assembler {
     private File output;
     private String outputFileName;
     private FileWriter writer;
+    private SymbolTable table;
+    private int lineNum;
+    private Parser pForLabel;
 
     public Assembler(String fname) {
         parser = new Parser(fname);
         code = new Code();
+        table = new SymbolTable();
+        pForLabel = new Parser(fname);
+        lineNum = 0;
         outputFileName = fname.replaceFirst("(?s)(.*)asm", "$1hack");
         output = new File(outputFileName);
         try {
@@ -22,6 +28,7 @@ public class Assembler {
     }
 
     public void convertToAssemble() {
+        addLabelToTable();
         if (!parser.hasMoreCommands()) return;
         do {
             parser.advance();
@@ -52,25 +59,38 @@ public class Assembler {
                 written = cCommand();
                 writeCommand(written);
                 break;
-            case Parser.L_COMMAND:
-                //TODO
         }
     }
 
+    private void addLabelToTable() {
+        if (!pForLabel.hasMoreCommands()) return;
+        do {
+            pForLabel.advance();
+            if (pForLabel.commandType() == Parser.L_COMMAND) {
+                table.addTable(pForLabel.symbol(), lineNum);
+                continue;
+            }
+            lineNum++;
+        } while (pForLabel.hasMoreCommands());
+        pForLabel.closeFile();
+    }
 
     private String aCommand() {
         String code = null;
+        String symbol = parser.symbol();
         try {
-            int value = Integer.parseInt(parser.symbol());
+            int value = Integer.parseInt(symbol);
             code = Integer.toBinaryString(value);
-
+        } catch (java.lang.NumberFormatException e) {
+            // symbol is not value
+            if (!table.isContain(symbol)) {
+                table.addTable(symbol);
+            }
+            code = table.symbolToBinary(symbol);
+        } finally {
             while (code.length() < 16) {
                 code = "0" + code;
             }
-        } catch (java.lang.NumberFormatException e) {
-            // symbol is not value
-            // TODO
-        } finally {
             return code;
         }
     }
@@ -80,14 +100,9 @@ public class Assembler {
                 this.code.dest(parser.dest()) + this.code.jump(parser.jump());
     }
 
-    private void lCommand() {
-        // TODO
-    }
-
     private void writeCommand(String code) {
-        String c = devideBlock(code);
         try {
-            writer.write(c + "\n");
+            writer.write(code + "\n");
         } catch (IOException e) {
             System.out.println(e);
         }
