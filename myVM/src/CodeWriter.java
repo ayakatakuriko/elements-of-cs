@@ -70,8 +70,6 @@ public class CodeWriter {
             case "not":
                 code = code + "\tM=!M\n";
                 break;
-                default:
-                    code = "hogege";
         }
         code = code + "\t@SP\n\tM=M+1\n";
 
@@ -86,9 +84,36 @@ public class CodeWriter {
                 switch (segment) {
                     case "constant":
                         code = "\t@" + index + "\n\tD=A\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
+                    case "local":
+                        code = "\t@" + index + "\n\tD=A\n\t@LCL\n\tA=M+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
+                    case "argument":
+                        code = "\t@" + index + "\n\tD=A\n\t@ARG\n\tA=M+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
+                    case "this":
+                        code = "\t@" + index + "\n\tD=A\n\t@THIS\n\tA=M+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
+                    case "that":
+                        code = "\t@" + index + "\n\tD=A\n\t@THAT\n\tA=M+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
                 }
                 break;
             case Parser.C_POP:
+                switch (segment) {
+                    case "local":
+                        code = "\t@" + index + "\n\tD=A\n\t@LCL\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        break;
+                    case "argument":
+                        code = "\t@" + index + "\n\tD=A\n\t@ARG\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        break;
+                    case "this":
+                        code = "\t@" + index + "\n\tD=A\n\t@THIS\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        break;
+                    case "that":
+                        code = "\t@" + index + "\n\tD=A\n\t@THAT\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        break;
+                }
                 break;
         }
 
