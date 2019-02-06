@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +6,6 @@ import java.util.Set;
  * Parser class of the Element of Computer Architecture.
  * Parse one vm file.
  * @author ayakatakuriko
- * @data 2019/02/06
  * */
 
 public class Parser {
