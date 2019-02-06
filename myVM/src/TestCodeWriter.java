@@ -4,7 +4,7 @@ public class TestCodeWriter {
     @Test
     public void TestWriteIntoFile() {
         CodeWriter cw = new CodeWriter("./testFiles/test.asm");
-        cw.writeArithmetic("add");
+        cw.writeArithmetic("gt");
         cw.writePushPop(Parser.C_PUSH, "constant", "12");
         cw.close();
     }

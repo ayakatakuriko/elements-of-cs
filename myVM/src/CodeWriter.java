@@ -44,21 +44,21 @@ public class CodeWriter {
                 code = code + "\tD=M\n\t@SP\n\tM=M-1\n\tA=M\n\tD=D-M\n\t@Jump" + lnum +
                         "\n\tD;JEQ\n\t@SP\n\tA=M\n\tM=0\n\t@End" + lnum +
                         "\n\t0;JMP\n(Jump" + lnum + ")\n\t@SP\n\tA=M\n\tM=-1\n(End" +
-                        lnum + ")\n\t@SP\n\tA=M\n";
+                        lnum + ")\n";
                 labelNum++;
                 break;
             case "gt":
                 code = code + "\tD=M\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M-D\n\t@Jump" + lnum +
                         "\n\tD;JGT\n\t@SP\n\tA=M\n\tM=0\n\t@End" + lnum +
                         "\n\t0;JMP\n(Jump" + lnum + ")\n\t@SP\n\tA=M\n\tM=-1\n(End" +
-                        lnum + ")\n\t@SP\n\tA=M\n";
+                        lnum + ")\n";
                 labelNum++;
                 break;
             case "lt":
                 code = code + "\tD=M\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M-D\n\t@Jump" + lnum +
                         "\n\tD;JLT\n\t@SP\n\tA=M\n\tM=0\n\t@End" + lnum +
                         "\n\t0;JMP\n(Jump" + lnum + ")\n\t@SP\n\tA=M\n\tM=-1\n(End" +
-                        lnum + ")\n\t@SP\n\tA=M\n";
+                        lnum + ")\n";
                 labelNum++;
                 break;
             case "and":
@@ -70,6 +70,8 @@ public class CodeWriter {
             case "not":
                 code = code + "\tM=!M\n";
                 break;
+                default:
+                    code = "hogege";
         }
         code = code + "\t@SP\n\tM=M+1\n";
 
@@ -103,6 +105,7 @@ public class CodeWriter {
 
     public void close() {
         try {
+            writeCode("(END_INFINIT_LOOP)\n\t@END_INFINIT_LOOP\n\t0;JMP\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

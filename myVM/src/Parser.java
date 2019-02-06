@@ -32,7 +32,7 @@ public class Parser {
         arithmeticSet.add("sub");
         arithmeticSet.add("neg");
         arithmeticSet.add("eq");
-        arithmeticSet.add("qt");
+        arithmeticSet.add("gt");
         arithmeticSet.add("lt");
         arithmeticSet.add("and");
         arithmeticSet.add("or");

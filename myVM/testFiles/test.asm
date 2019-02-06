@@ -26,3 +26,35 @@
 	@PS
 	M=D
 	A=A+1
+	@SP
+	M=M-1
+	A=M
+	D=M
+	@SP
+	M=M-1
+	A=M
+	D=M-D
+	@Jump0
+	D;JGT
+	@SP
+	A=M
+	M=0
+	@End0
+	0;JMP
+(Jump0)
+	@SP
+	A=M
+	M=-1
+(End0)
+	@SP
+	M=M+1
+	@12
+	D=A
+	@SP
+	A=M
+	M=D
+	@SP
+	M=M+1
+(END_INFINIT_LOOP)
+	@END_INFINIT_LOOP
+	0;JMP
