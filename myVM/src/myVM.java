@@ -14,10 +14,12 @@ public class myVM {
     private CodeWriter cw;
     private ArrayList<String> files;
     private int index;
+    private String funcName;
 
     public myVM(String fname) {
         files = new ArrayList<String>();
         File f = new File(fname);
+        funcName = "";
 
         if (f.isDirectory()) {
             final Stream<String> nameStream = Arrays.stream(f.list());
@@ -61,10 +63,19 @@ public class myVM {
             case Parser.C_POP:
                 cw.writePushPop(parser.commandType(), parser.arg1(), parser.arg2());
                 break;
+            case Parser.C_LABEL:
+                cw.writeLabel(funcName + "$" + parser.arg1());
+                break;
+            case Parser.C_GOTO:
+                cw.writeGoto(funcName + "$" + parser.arg1());
+                break;
+            case Parser.C_IF:
+                cw.writeIf(funcName + "$" + parser.arg1());
+                break;
         }
     }
 
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         myVM vm = new myVM(args[0]);
         vm.mainFunc();
     }

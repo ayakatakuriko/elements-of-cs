@@ -12,7 +12,7 @@ public class CodeWriter {
     private FileWriter writer;
     private File output;
     private int labelNum;
-    String input;
+    private String input;
 
     public CodeWriter(String fname) {
         output = new File(fname);
@@ -157,5 +157,33 @@ public class CodeWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void writeInit() {
+        writeCode("");
+    }
+
+    public void writeLabel(String label) {
+        writeCode("(" + label + ")\n");
+    }
+
+    public void writeGoto(String label) {
+        writeCode("\t@" + label + "\n\t0;JMP\n");
+    }
+
+    public void writeIf(String label) {
+        writeCode("\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@" + label + "\n\tD;JNE\n");
+    }
+
+    public void writeCall(String functionName, int numArgs) {
+        writeCode("");
+    }
+
+    public void writeReturn() {
+        writeCode("");
+    }
+
+    public void writeFunction(String functionName, int numLocals) {
+        writeCode("");
     }
 }

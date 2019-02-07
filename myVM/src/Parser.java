@@ -72,6 +72,12 @@ public class Parser {
         if (arithmeticSet.contains(command)) return C_ARITHMETIC;
         else if (command.equals("push")) return C_PUSH;
         else if (command.equals("pop")) return C_POP;
+        else if (command.equals("label")) return C_LABEL;
+        else if (command.equals("goto")) return C_GOTO;
+        else if (command.equals("if-goto")) return C_IF;
+        else if (command.equals("function")) return C_FUNCTION;
+        else if (command.equals("call")) return C_CALL;
+        else if (command.equals("return")) return C_RETURN;
         else return 0;
     }
 
