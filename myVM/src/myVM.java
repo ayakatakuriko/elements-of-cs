@@ -35,6 +35,7 @@ public class myVM {
     public void mainFunc() {
         while (index < files.size()) {
             parser = new Parser(files.get(index));
+            cw.setFileName(files.get(index));
             if (!parser.hasMoreCommands()) {
                 index++;
                 continue;
@@ -55,6 +56,9 @@ public class myVM {
                 cw.writeArithmetic(parser.arg1());
                 break;
             case Parser.C_PUSH:
+                cw.writePushPop(parser.commandType(), parser.arg1(), parser.arg2());
+                break;
+            case Parser.C_POP:
                 cw.writePushPop(parser.commandType(), parser.arg1(), parser.arg2());
                 break;
         }

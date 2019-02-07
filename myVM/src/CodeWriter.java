@@ -12,9 +12,11 @@ public class CodeWriter {
     private FileWriter writer;
     private File output;
     private int labelNum;
+    String input;
 
     public CodeWriter(String fname) {
         output = new File(fname);
+        input = null;
         labelNum = 0;
         try {
             writer = new FileWriter(output, true);
@@ -24,7 +26,9 @@ public class CodeWriter {
     }
 
     public void setFileName(String fileName) {
-
+        input = fileName.replaceFirst("(?s)(.*).vm", "$1");
+        input = (input.lastIndexOf("/") < 0) ?
+                        input : input.substring(input.length() - input.lastIndexOf("/") + 1, input.length());
     }
 
     public void writeArithmetic(String command) {
@@ -97,21 +101,39 @@ public class CodeWriter {
                     case "that":
                         code = "\t@" + index + "\n\tD=A\n\t@THAT\n\tA=M+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
                         break;
+                    case "pointer":
+                        code = "\t@" + index + "\n\tD=A\n\t@THIS\n\tA=A+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
+                    case "temp":
+                        code = "\t@" + index + "\n\tD=A\n\t@R5\n\tA=A+D\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
+                    case "static":
+                        code = "\t@" + input + "." + index + "\n\tD=M\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+                        break;
                 }
                 break;
             case Parser.C_POP:
                 switch (segment) {
                     case "local":
-                        code = "\t@" + index + "\n\tD=A\n\t@LCL\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        code = "\t@" + index + "\n\tD=A\n\t@LCL\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tA=M\n\tM=D\n";
                         break;
                     case "argument":
-                        code = "\t@" + index + "\n\tD=A\n\t@ARG\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        code = "\t@" + index + "\n\tD=A\n\t@ARG\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tA=M\n\tM=D\n";
                         break;
                     case "this":
-                        code = "\t@" + index + "\n\tD=A\n\t@THIS\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        code = "\t@" + index + "\n\tD=A\n\t@THIS\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tA=M\n\tM=D\n";
                         break;
                     case "that":
-                        code = "\t@" + index + "\n\tD=A\n\t@THAT\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tM=D\n";
+                        code = "\t@" + index + "\n\tD=A\n\t@THAT\n\tD=M+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tA=M\n\tM=D\n";
+                        break;
+                    case "pointer":
+                        code = "\t@" + index + "\n\tD=A\n\t@THIS\n\tD=A+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tA=M\n\tM=D\n";
+                        break;
+                    case "temp":
+                        code = "\t@" + index + "\n\tD=A\n\t@R5\n\tD=A+D\n\t@R15\n\tM=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@R15\n\tA=M\n\tM=D\n";
+                        break;
+                    case "static":
+                        code = "@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@" + input + "." + index + "\n\tM=D\n";
                         break;
                 }
                 break;
