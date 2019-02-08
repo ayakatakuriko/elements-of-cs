@@ -160,7 +160,7 @@ public class CodeWriter {
     }
 
     public void writeInit() {
-        writeCode("");
+        writeCode("\t@256\n\tD=A\n\t@SP\n\tM=D\n\t@Sys.init\n\t0;JMP\n");
     }
 
     public void writeLabel(String label) {
@@ -176,14 +176,31 @@ public class CodeWriter {
     }
 
     public void writeCall(String functionName, int numArgs) {
-        writeCode("");
+        writeCode("\t@" + functionName + ".returnAddress\n\t@LCL\n\tD=A\n\t@SP" +
+                "\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n\t@ARG\n\tD=A\n\t@SP\n\tA=M\n\t" +
+                "M=D\n\t@SP\n\tM=M+1\n\t@THIS\n\tD=A\n\t@SP\n\tA=M\n\tM=D\n\t" +
+                "@SP\n\tM=M+1\n\t@THAT\n\tD=A\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\t" +
+                "M=M+1\n\t@SP\n\tD=M\n\t@5\n\tD=D-A\n\t@" + numArgs + "\n\tD=D-A" +
+                "\n\t@ARG\n\tM=D\n\t@SP\n\tD=M\n\t@LCL\n\tM=D\n");
+        writeGoto(functionName);
+        writeCode("(" + functionName + ".returnAddress)\n");
     }
 
     public void writeReturn() {
-        writeCode("");
+        writeCode("\t@LCL\n\tD=M\n\t@R15\n\tM=D\n\t@5\n\tA=D-A\n\tD=M\n\t@R14\n\t" +
+                "M=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@ARG\n\tA=M\n\tM=D\n\tD=A+1\n\t@SP" +
+                "\n\tM=D\n\t@R15\n\tA=M\n\tA=A-1\n\tD=M\n\t@THAT\n\tM=D\n\t@R15" +
+                "\n\tA=M\n\tA=A-1\n\tA=A-1\n\tD=M\n\t@THIS\n\tM=D\n\t@R15\n\tA=M" +
+                "\n\tA=A-1\n\tA=A-1\n\tA=A-1\n\tD=M\n\t@ARG\n\tM=D\n\t@R15\n\tA=M" +
+                "\n\tA=A-1\n\tA=A-1\n\tA=A-1\n\tA=A-1\n\tD=M\n\t@LCL\n\tM=D\n\t" +
+                "@R14\n\tA=M\n\t0;JMP\n");
     }
 
     public void writeFunction(String functionName, int numLocals) {
-        writeCode("");
+        writeCode("(" + functionName + ")\n\t@" + numLocals + "\n\tD=A\n\t@" +
+                functionName + ".InitializeEnd\n\tD;JEQ\n(" + functionName +
+                ".Initialize)\n\tD=D-1\n\t@SP\n\tA=M\n\tM=0\n\t@SP\n\tM=M+1\n\t@" +
+                functionName + ".Initialize\n\tD;JNE\n(" + functionName +
+                ".InitializeEnd)\n");
     }
 }

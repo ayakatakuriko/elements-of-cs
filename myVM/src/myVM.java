@@ -25,6 +25,7 @@ public class myVM {
             final Stream<String> nameStream = Arrays.stream(f.list());
             nameStream
                     .filter(name -> name.endsWith("vm"))
+                    .map(name -> String.join("/", fname, name))
                     .forEach(files::add);
         } else
             files.add(fname);
@@ -35,6 +36,7 @@ public class myVM {
     }
 
     public void mainFunc() {
+        cw.writeInit();
         while (index < files.size()) {
             parser = new Parser(files.get(index));
             cw.setFileName(files.get(index));
@@ -71,6 +73,17 @@ public class myVM {
                 break;
             case Parser.C_IF:
                 cw.writeIf(funcName + "$" + parser.arg1());
+                break;
+            case Parser.C_FUNCTION:
+                funcName = parser.arg1();
+                cw.writeFunction(funcName, Integer.parseInt(parser.arg2()));
+                break;
+            case Parser.C_CALL:
+                cw.writeCall(parser.arg1(), Integer.parseInt(parser.arg2()));
+                break;
+            case Parser.C_RETURN:
+                funcName = "";
+                cw.writeReturn();
                 break;
         }
     }
