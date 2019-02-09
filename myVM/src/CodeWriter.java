@@ -12,12 +12,14 @@ public class CodeWriter {
     private FileWriter writer;
     private File output;
     private int labelNum;
+    private int callFuncNum;
     private String input;
 
     public CodeWriter(String fname) {
         output = new File(fname);
         input = null;
         labelNum = 0;
+        callFuncNum = 0;
         try {
             writer = new FileWriter(output, true);
         } catch (IOException e) {
@@ -160,7 +162,8 @@ public class CodeWriter {
     }
 
     public void writeInit() {
-        writeCode("\t@256\n\tD=A\n\t@SP\n\tM=D\n\t@Sys.init\n\t0;JMP\n");
+        writeCode("\t@256\n\tD=A\n\t@SP\n\tM=D\n");
+        writeCall("Sys.init", 0);
     }
 
     public void writeLabel(String label) {
@@ -176,19 +179,22 @@ public class CodeWriter {
     }
 
     public void writeCall(String functionName, int numArgs) {
-        writeCode("\t@" + functionName + ".returnAddress\n\t@LCL\n\tD=A\n\t@SP" +
-                "\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n\t@ARG\n\tD=A\n\t@SP\n\tA=M\n\t" +
-                "M=D\n\t@SP\n\tM=M+1\n\t@THIS\n\tD=A\n\t@SP\n\tA=M\n\tM=D\n\t" +
-                "@SP\n\tM=M+1\n\t@THAT\n\tD=A\n\t@SP\n\tA=M\n\tM=D\n\t@SP\n\t" +
-                "M=M+1\n\t@SP\n\tD=M\n\t@5\n\tD=D-A\n\t@" + numArgs + "\n\tD=D-A" +
+        String push = "\t@SP\n\tA=M\n\tM=D\n\t@SP\n\tM=M+1\n";
+        writeCode("\t@" + functionName + "." + callFuncNum + ".returnAddress\n\tD=A\n" + push +
+                "\t@LCL\n\tD=M\n" + push +
+                "\t@ARG\n\tD=M\n" + push +
+                "\t@THIS\n\tD=M\n" + push +
+                "\t@THAT\n\tD=M\n" + push +
+                "\t@SP\n\tD=M\n\t@5\n\tD=D-A\n\t@" + numArgs + "\n\tD=D-A" +
                 "\n\t@ARG\n\tM=D\n\t@SP\n\tD=M\n\t@LCL\n\tM=D\n");
         writeGoto(functionName);
-        writeCode("(" + functionName + ".returnAddress)\n");
+        writeCode("(" + functionName + "." + callFuncNum + ".returnAddress)\n");
+        callFuncNum++;
     }
 
     public void writeReturn() {
         writeCode("\t@LCL\n\tD=M\n\t@R15\n\tM=D\n\t@5\n\tA=D-A\n\tD=M\n\t@R14\n\t" +
-                "M=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@ARG\n\tA=M\n\tM=D\n\tD=A+1\n\t@SP" +
+                "M=D\n\t@SP\n\tM=M-1\n\tA=M\n\tD=M\n\t@ARG\n\tA=M\n\tM=D\n\t@ARG\n\tD=M+1\n\t@SP" +
                 "\n\tM=D\n\t@R15\n\tA=M\n\tA=A-1\n\tD=M\n\t@THAT\n\tM=D\n\t@R15" +
                 "\n\tA=M\n\tA=A-1\n\tA=A-1\n\tD=M\n\t@THIS\n\tM=D\n\t@R15\n\tA=M" +
                 "\n\tA=A-1\n\tA=A-1\n\tA=A-1\n\tD=M\n\t@ARG\n\tM=D\n\t@R15\n\tA=M" +

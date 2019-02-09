@@ -82,7 +82,6 @@ public class myVM {
                 cw.writeCall(parser.arg1(), Integer.parseInt(parser.arg2()));
                 break;
             case Parser.C_RETURN:
-                funcName = "";
                 cw.writeReturn();
                 break;
         }
