@@ -30,7 +30,7 @@ public class CodeWriter {
     public void setFileName(String fileName) {
         input = fileName.replaceFirst("(?s)(.*).vm", "$1");
         input = (input.lastIndexOf("/") < 0) ?
-                        input : input.substring(input.length() - input.lastIndexOf("/") + 1, input.length());
+                        input : input.substring(1 + input.lastIndexOf("/"), input.length());
     }
 
     public void writeArithmetic(String command) {
