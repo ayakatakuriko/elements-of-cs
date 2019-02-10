@@ -1,0 +1,152 @@
+class Game {
+field boolean exit;
+field Array quize;
+field char up;
+field char down;
+field char left;
+field char right;
+field Player player;
+
+constructor Game new() {
+  let exit = false;
+  let up = 131;
+  let down = 133;
+  let right = 132;
+  let left = 130;
+  let player = Player.new();
+  return this;
+}
+
+method int generateQuize(int num) {
+  if (num = 1) {
+      let quize = Array.new(3);
+      let quize[0] = up;
+      let quize[1] = left;
+      let quize[2] = down;
+      return 3;
+  }
+  if (num = 2) {
+      let quize = Array.new(5);
+      let quize[0] = right;
+      let quize[1] = up;
+      let quize[2] = left;
+      let quize[3] = down;
+      let quize[4] = left;
+      return 5;
+  }
+  if (num = 3) {
+      let quize = Array.new(8);
+      let quize[0] = up;
+      let quize[1] = left;
+      let quize[2] = down;
+      let quize[3] = right;
+      let quize[4] = left;
+      let quize[5] = right;
+      let quize[6] = up;
+      let quize[7] = down;
+      return 8;
+  }
+  return 0;
+}
+
+  method void run() {
+    var char key;
+    var int qNum;
+    var boolean flag;
+    var int size;
+    var int i;
+    let qNum = 0;
+    let key = 0;
+
+      do Output.moveCursor(8,10);
+      do Output.printString("Please Press Any button...");
+      while (key = 0) {
+      let key = Keyboard.keyPressed();
+      }
+      do Output.moveCursor(8,10);
+      do Output.printString("Ready?                       ");
+      do Sys.wait(500);
+      do Output.moveCursor(8,10);
+      do Output.printString("GO!                         ");
+      do Sys.wait(500);
+      do Output.moveCursor(8,10);
+      do Output.printString("                            ");
+
+      while ((qNum < 3) & (~exit)) {
+        let qNum = qNum + 1;
+        let size = generateQuize(qNum);
+        let i = 0;
+        do player.showDefault();
+        while (i < size) {
+          if (quize[i] = up) {
+            do Output.moveCursor(3,5);
+            do Output.printString("  UP ");
+          }
+
+          if (quize[i] = down) {
+            do Output.moveCursor(3,5);
+            do Output.printString(" DOWN");
+          }
+
+          if (quize[i] = left) {
+            do Output.moveCursor(3,5);
+            do Output.printString(" LEFT");
+          }
+
+          if (quize[i] = right) {
+            do Output.moveCursor(3,5);
+            do Output.printString("RIGHT");
+          }
+          do Sys.wait(300);
+          do Output.moveCursor(3,5);
+          do Output.printString("      ");
+          do Sys.wait(200);
+          let i = i + 1;
+        }
+
+        let i = 0;
+
+        while ((i < size) & (~exit)) {
+          let key = Keyboard.keyPressed();
+
+          if (key = 140) {
+            let exit = true;
+          } else {
+            if (key = 0) {
+             // PASS
+            } else {
+              if (~(key = quize[i])) {
+                  let exit = true;
+                } else {
+                  if (key = up) {
+                    do player.showUp();
+                  }
+
+                    if (key = down) {
+                    do player.showDown();
+                  }
+
+                  if (key = left) {
+                    do player.showLeft();
+                  }
+
+                  if (key = right) {
+                    do player.showRight();
+                    }
+                    let i = i+ 1;
+                }
+              }
+          }
+        }
+        do quize.dispose();
+      }
+      if (exit) {
+        do Output.moveCursor(20,37);
+        do Output.printString("Game Over...");
+      } else {
+      do Output.moveCursor(20,37);
+      do Output.printString("Game Clear!!!");
+      }
+      return;
+}
+}

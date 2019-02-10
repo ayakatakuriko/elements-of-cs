@@ -1,0 +1,117 @@
+class Player {
+  field int head_size;
+  field int hx;
+  field int hy;
+  field int body_size;
+  field int bx; // 首の付け根のx座標
+  field int by; // 首の付け根のy座標
+  field int ax; // うでの付け根
+  field int ay;
+  field int ty; // 足先のy座標
+  field int ltx;
+  field int rtx;
+
+  constructor Player new () {
+    let head_size = 25;
+    let body_size = 65;
+    let bx = 210;
+    let by = 90;
+    let hx = 210;
+    let hy = 73;
+    let ax = 210;
+    let ay = 100;
+    let ty = 170;
+    let ltx = 180;
+    let rtx = 240;
+    return this;
+  }
+
+  method void showDefault() {
+    do Screen.clearScreen();
+    do Screen.setColor(true);
+    // Draw human
+    do Screen.drawCircle(hx, hy, head_size);
+    do Screen.drawLine(bx, by, bx, by + body_size);
+    do Screen.drawLine(bx, by + body_size, ltx, ty);
+    do Screen.drawLine(bx, by + body_size, rtx, ty);
+
+    // Draw Arm
+    do Screen.drawLine(ax, ay, ax - 35, ay + 20);
+    do Screen.drawLine(ax, ay, ax + 35, ay + 20);
+    do Screen.drawLine(ax - 35, ay + 20, ax - 10, ay + 15);
+    do Screen.drawLine(ax + 35, ay + 20, ax + 10, ay + 15);
+    return ;
+  }
+
+  method void showUp() {
+    do Screen.clearScreen();
+    do Screen.setColor(true);
+    // Draw human
+    do Screen.drawCircle(hx, hy, head_size);
+    do Screen.drawLine(bx, by, bx, by + body_size);
+    do Screen.drawLine(bx, by + body_size, ltx, ty);
+    do Screen.drawLine(bx, by + body_size, rtx, ty);
+
+    // Draw Arm
+    do Screen.drawLine(ax, ay, ax - 40, ay - 20);
+    do Screen.drawLine(ax, ay, ax + 40, ay - 20);
+    do Screen.drawLine(ax - 40, ay - 20, ax - 40, ay - 50);
+    do Screen.drawLine(ax + 40, ay - 20, ax + 40, ay - 50);
+    return ;
+  }
+
+  method void showDown() {
+    do Screen.clearScreen();
+    do Screen.setColor(true);
+    // Draw human
+    do Screen.drawCircle(hx, hy, head_size);
+    do Screen.drawLine(bx, by, bx, by + body_size);
+    do Screen.drawLine(bx, by + body_size, ltx, ty);
+    do Screen.drawLine(bx, by + body_size, rtx, ty);
+
+    // Draw Arm
+    do Screen.drawLine(ax, ay, ax - 40, ay + 20);
+    do Screen.drawLine(ax, ay, ax + 40, ay + 20);
+    do Screen.drawLine(ax - 40, ay + 20, ax - 30, ay + 40);
+    do Screen.drawLine(ax + 40, ay + 20, ax + 30, ay + 40);
+    return ;
+  }
+
+  method void showLeft() {
+    do Screen.clearScreen();
+    do Screen.setColor(true);
+    // Draw human
+    do Screen.drawCircle(hx, hy, head_size);
+    do Screen.drawLine(bx, by, bx, by + body_size);
+    do Screen.drawLine(bx, by + body_size, ltx, ty);
+    do Screen.drawLine(bx, by + body_size, rtx, ty);
+
+    // Draw Arm
+    do Screen.drawLine(ax, ay, ax - 70, ay - 25);
+    do Screen.drawLine(ax, ay, ax + 30, ay - 15);
+    do Screen.drawLine(ax + 30, ay - 15, ax - 35, ay - 50);
+    return ;
+  }
+
+  method void showRight() {
+    do Screen.clearScreen();
+    do Screen.setColor(true);
+    // Draw human
+    do Screen.drawCircle(hx, hy, head_size);
+    do Screen.drawLine(bx, by, bx, by + body_size);
+    do Screen.drawLine(bx, by + body_size, ltx, ty);
+    do Screen.drawLine(bx, by + body_size, rtx, ty);
+
+    // Draw Arm
+    do Screen.drawLine(ax, ay, ax + 70, ay - 25);
+    do Screen.drawLine(ax, ay, ax - 30, ay - 15);
+    do Screen.drawLine(ax - 30, ay - 15, ax + 35, ay - 50);
+    return ;
+  }
+
+  method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+  }
+  
+}

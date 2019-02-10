@@ -1,0 +1,13 @@
+/**
+ * 記憶力ゲーム
+ * 左上に出る指示にしたがって矢印キーを入力しよう!
+ */
+
+class Main {
+  function void main() {
+    var Game game;
+    let game = Game.new();
+    do game.run();
+    return ;
+  }
+}
