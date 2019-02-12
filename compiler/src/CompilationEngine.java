@@ -2,18 +2,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class CompilationEngine {
-    private File input;
-    private File output;
     private FileWriter writer;
     private JackToknizer jt;
     private HashMap<Integer, String> keywordMap;
+    private HashSet<String> opSet;
+    private String preToken;
 
     public CompilationEngine(File input, File output) {
-        this.input = input;
-        this.output = output;
         jt = new JackToknizer(input);
+        preToken = null;
         try {
             writer = new FileWriter(output, true);
         } catch (IOException e) {
@@ -41,6 +41,17 @@ public class CompilationEngine {
         keywordMap.put(JackToknizer.ELSE, "else");
         keywordMap.put(JackToknizer.WHILE, "while");
         keywordMap.put(JackToknizer.RETURN, "return");
+
+        opSet = new HashSet<>();
+        opSet.add("+");
+        opSet.add("-");
+        opSet.add("*");
+        opSet.add("/");
+        opSet.add("&");
+        opSet.add("|");
+        opSet.add("<");
+        opSet.add(">");
+        opSet.add("=");
     }
 
     public void compileClass() {
@@ -293,7 +304,6 @@ public class CompilationEngine {
         jt.advance();
         if (jt.tokenType() != JackToknizer.SYMBOL) {
             compileExpression();
-            jt.advance();
         }
         /* ; */
         writeToken();
@@ -307,13 +317,14 @@ public class CompilationEngine {
         /* ( */
         jt.advance();
         writeToken();
+        jt.advance();
         compileExpression();
         /* ) */
-        jt.advance();
         writeToken();
         /* { */
         jt.advance();
         writeToken();
+        jt.advance();
         compileStatements();
         /* } */
         writeToken();
@@ -325,9 +336,9 @@ public class CompilationEngine {
             /* { */
             jt.advance();
             writeToken();
+            jt.advance();
             compileExpression();
             /* } */
-            jt.advance();
             writeToken();
             jt.advance();
         }
@@ -335,15 +346,115 @@ public class CompilationEngine {
     }
 
     public void compileExpression() {
-
+        writeCode("<expression>\n");
+        compileTerm();
+        while (jt.tokenType() == JackToknizer.SYMBOL && opSet.contains(jt.symbol())) {
+            /* op */
+            writeCode("<op>\n");
+            writeToken();
+            writeCode("</op>\n");
+            compileTerm();
+        }
+        writeCode("</expression>\n");
     }
 
     public void compileTerm() {
-
+        writeCode("<term>\n");
+        switch (jt.tokenType()) {
+            case JackToknizer.SYMBOL:
+                if (jt.symbol().equals("(")) {
+                    /* (expression) */
+                    /* ( */
+                    writeToken();
+                    jt.advance();
+                    compileExpression();
+                    /* ) */
+                    writeToken();
+                    jt.advance();
+                } else {
+                    /* unaryOp term */
+                    writeCode("<unaryOp>\n");
+                    writeToken();
+                    jt.advance();
+                    compileTerm();
+                    writeCode("</unaryOp>\n");
+                }
+                break;
+            case JackToknizer.INT_CONST:
+                writeToken();
+                jt.advance();
+                break;
+            case JackToknizer.STRING_CONST:
+                writeToken();
+                jt.advance();
+                break;
+            case JackToknizer.KEYWORD:
+                writeCode("<KeywordConstant>\n");
+                writeToken();
+                writeCode("</KeywordConstant>\n");
+                jt.advance();
+                break;
+            case JackToknizer.IDENTIFIER:
+                preToken = jt.identifier();
+                jt.advance();
+                if (jt.tokenType() == JackToknizer.SYMBOL) {
+                    if (jt.symbol().equals("(")) {
+                        /* subroutineCall */
+                        writeCode("<identifier> " + preToken + " </identifier>\n");
+                        /* ( */
+                        writeToken();
+                        jt.advance();
+                        compileExpression();
+                        /* ) */
+                        writeToken();
+                        jt.advance();
+                        break;
+                    } else if (jt.symbol().equals(".")) {
+                        /* subroutineCall */
+                        writeCode("<identifier> " + preToken + " </identifier>\n");
+                        /* . */
+                        writeToken();
+                        /* subroutineName */
+                        jt.advance();
+                        writeToken();
+                        /* ( */
+                        writeToken();
+                        jt.advance();
+                        compileExpressionList();
+                        /* ) */
+                        writeToken();
+                        jt.advance();
+                        break;
+                    }else if (jt.symbol().equals("[")) {
+                       /* varName [expression] */
+                        writeCode("<identifier> " + preToken + " </identifier>\n");
+                        /* [ */
+                        writeToken();
+                        jt.advance();
+                        compileExpression();
+                        /* ] */
+                        writeToken();
+                        jt.advance();
+                        break;
+                    }
+                }
+                /* varName */
+                    writeCode("<identifier> " + preToken + " </identifier>\n");
+        }
+        writeCode("<term>\n");
     }
 
     public void compileExpressionList() {
-
+        writeCode("<expressionList>\n");
+        if (jt.tokenType() != JackToknizer.SYMBOL || !jt.symbol().equals("(")) {
+            compileExpression();
+            while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
+                writeToken();
+                jt.advance();
+                compileExpression();
+            }
+        }
+        writeCode("</expressionList>\n");
     }
 
     private void writeToken() {
