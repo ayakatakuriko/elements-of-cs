@@ -49,7 +49,7 @@ public class TestToknizer {
         jt.advance();
         jt.advance();
         assertEquals(JackToknizer.STRING_CONST, jt.tokenType());
-        assertEquals("Paris", jt.stringVal());
+        assertEquals("I Love Paris", jt.stringVal());
 
         jt.advance();
         assertEquals(JackToknizer.SYMBOL, jt.tokenType());

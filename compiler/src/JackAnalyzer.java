@@ -8,7 +8,7 @@ public class JackAnalyzer {
     public JackAnalyzer(String fname) {
         this.fname = fname;
         input = new File(fname);
-        output = new File(fname.replaceFirst("(?s)(.*)jack", "$1html"));
+        output = new File(fname.replaceFirst("(?s)(.*)jack", "$1xml"));
     }
 
     public static void main(String args []) {

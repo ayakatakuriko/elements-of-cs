@@ -49,6 +49,18 @@ public class JackToknizer {
             this.br = new BufferedReader(new FileReader((this.input)));
             do {
                 this.next = br.read();
+                if (this.next == '/') {
+                    this.next = br.read();
+                    if (next == '/') {
+                        while (next != '\n')
+                            this.next = br.read();
+                    } else if (next == '*') {
+                        while (next != '/')
+                            this.next = br.read();
+                        this.next = br.read();
+                    }
+
+                }
             } while (skipSet.contains(next));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -108,21 +120,50 @@ public class JackToknizer {
     public void advance() {
         if (!hasMoreTokens()) return;
         token = "";
+        boolean isConstString = (next == '"') ? true : false;
+
 
         do {
             crr = next;
-            token += String.valueOf((char)crr);
             try {
                 next = br.read();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            token += String.valueOf((char)crr);
+            while (isConstString) {
+                crr = next;
+                token += String.valueOf((char)crr);
+                isConstString = (next == '"') ? false: true;
+                try {
+                    next = br.read();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         } while (!skipSet.contains(next) && !symbolSet.contains(crr)
                 && !symbolSet.contains(next) && hasMoreTokens());
 
         while (skipSet.contains(next) && hasMoreTokens()) {
             try {
                 this.next = br.read();
+                if (this.next == '/') {
+                    br.mark(1);
+                    this.next = br.read();
+                    br.reset();
+                    if (next == '/') {
+                        while (next != '\n' && next != -1)
+                            this.next = br.read();
+                    } else if (next == '*') {
+                        while (next != '/')
+                            this.next = br.read();
+                        this.next = br.read();
+                    } else {
+                        next = '/';
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
