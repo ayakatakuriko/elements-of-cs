@@ -129,7 +129,6 @@ public class CompilationEngine {
         compileParameterList();
 
         /* ) */
-        jt.advance();
         writeToken();
 
         writeCode("<subroutineBody>\n");
@@ -138,7 +137,7 @@ public class CompilationEngine {
         writeToken();
 
         jt.advance();
-        if (jt.tokenType() == JackToknizer.KEYWORD &&
+        while (jt.tokenType() == JackToknizer.KEYWORD &&
                 jt.keyWord() == JackToknizer.VAR) {
             compileVarDec();
             jt.advance();
@@ -155,7 +154,6 @@ public class CompilationEngine {
     public void compileVarDec() {
         writeCode("<varDec>\n");
         /* var */
-        jt.advance();
         writeToken();
         /* type */
         jt.advance();
@@ -239,8 +237,33 @@ public class CompilationEngine {
         /* do */
         writeToken();
 
+        /* subroutineName | className | varName */
         jt.advance();
-        compileTerm();
+        writeToken();
+
+        jt.advance();
+        if (jt.symbol().equals("(")) {
+            /* ( */
+            writeToken();
+            jt.advance();
+            compileExpression();
+            /* ) */
+            writeToken();
+
+        } else if (jt.symbol().equals(".")) {
+            /* . */
+            writeToken();
+            /* subroutineName */
+            jt.advance();
+            writeToken();
+            /* ( */
+            jt.advance();
+            writeToken();
+            jt.advance();
+            compileExpressionList();
+            /* ) */
+            writeToken();
+        }
 
         /* ; */
         jt.advance();
@@ -252,7 +275,7 @@ public class CompilationEngine {
         writeCode("<letStatement>\n");
         /* let */
         writeToken();
-        /* ; */
+        /* varName */
         jt.advance();
         writeToken();
 
@@ -350,9 +373,8 @@ public class CompilationEngine {
         compileTerm();
         while (jt.tokenType() == JackToknizer.SYMBOL && opSet.contains(jt.symbol())) {
             /* op */
-            writeCode("<op>\n");
             writeToken();
-            writeCode("</op>\n");
+            jt.advance();
             compileTerm();
         }
         writeCode("</expression>\n");
@@ -373,11 +395,9 @@ public class CompilationEngine {
                     jt.advance();
                 } else {
                     /* unaryOp term */
-                    writeCode("<unaryOp>\n");
                     writeToken();
                     jt.advance();
                     compileTerm();
-                    writeCode("</unaryOp>\n");
                 }
                 break;
             case JackToknizer.INT_CONST:
@@ -418,6 +438,7 @@ public class CompilationEngine {
                         jt.advance();
                         writeToken();
                         /* ( */
+                        jt.advance();
                         writeToken();
                         jt.advance();
                         compileExpressionList();
@@ -425,7 +446,7 @@ public class CompilationEngine {
                         writeToken();
                         jt.advance();
                         break;
-                    }else if (jt.symbol().equals("[")) {
+                    } else if (jt.symbol().equals("[")) {
                        /* varName [expression] */
                         writeCode("<identifier> " + preToken + " </identifier>\n");
                         /* [ */
@@ -441,12 +462,12 @@ public class CompilationEngine {
                 /* varName */
                     writeCode("<identifier> " + preToken + " </identifier>\n");
         }
-        writeCode("<term>\n");
+        writeCode("</term>\n");
     }
 
     public void compileExpressionList() {
         writeCode("<expressionList>\n");
-        if (jt.tokenType() != JackToknizer.SYMBOL || !jt.symbol().equals("(")) {
+        if (jt.tokenType() != JackToknizer.SYMBOL || !jt.symbol().equals(")")) {
             compileExpression();
             while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
                 writeToken();

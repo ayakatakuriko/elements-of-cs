@@ -36,8 +36,8 @@
       <file leaf-file-name="TestCompilationEngine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-329">
-              <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
+            <state relative-caret-position="113">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -48,7 +48,7 @@
       <file leaf-file-name="JackToknizer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-401">
+            <state relative-caret-position="301">
               <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -68,12 +68,19 @@
       <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="453" column="36" selection-start-line="453" selection-start-column="36" selection-end-line="453" selection-end-column="36" />
+            <state relative-caret-position="264">
+              <caret line="469" column="75" selection-start-line="469" selection-start-column="75" selection-end-line="469" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.jack" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/Main.jack">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-336" />
           </provider>
         </entry>
       </file>
@@ -180,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestCompilationEngine.testSquare">
+  <component name="RunManager" selected="JUnit.TestCompilationEngine.testArrayTest">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -316,10 +323,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
         <item itemvalue="JUnit.TestCompilationEngine.testArrayTest" />
-        <item itemvalue="JUnit.TestToknizer.testAdvance" />
         <item itemvalue="JUnit.TestCompilationEngine.testToknizer" />
+        <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
+        <item itemvalue="JUnit.TestToknizer.testAdvance" />
         <item itemvalue="JUnit.TestToknizer.testHasMoreToken" />
       </list>
     </recent_temporary>
@@ -338,35 +345,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestToknizer_testAdvance - 2019.02.12 at 13h 41m 00s.xml">
-      <configuration name="TestToknizer.testAdvance" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestToknizer_testAdvance - 2019.02.12 at 13h 43m 36s.xml">
-      <configuration name="TestToknizer.testAdvance" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestToknizer_testAdvance - 2019.02.12 at 13h 44m 20s.xml">
-      <configuration name="TestToknizer.testAdvance" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestToknizer_testAdvance - 2019.02.12 at 13h 44m 53s.xml">
-      <configuration name="TestToknizer.testAdvance" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestToknizer_testAdvance - 2019.02.12 at 13h 45m 48s.xml">
-      <configuration name="TestToknizer.testAdvance" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestToknizer_testAdvance - 2019.02.12 at 13h 48m 08s.xml">
-      <configuration name="TestToknizer.testAdvance" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 13h 48m 40s.xml">
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 46m 35s.xml">
       <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 13h 58m 08s.xml">
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 47m 42s.xml">
       <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 13h 59m 37s.xml">
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 49m 13s.xml">
       <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testSquare - 2019.02.12 at 14h 00m 55s.xml">
-      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 53m 57s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 56m 34s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 58m 33s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 58m 50s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 59m 55s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 19h 00m 13s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 19h 04m 39s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -382,12 +389,12 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.31441718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2576687" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.12883435" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.12883435" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.5259027" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17397882" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297546" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -414,8 +421,20 @@
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/TestCompilationEngine.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
+          <line>302</line>
+          <properties />
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="23" />
+      <option name="time" value="37" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -505,13 +524,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testFiles/testCode1.jack">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/TestToknizer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -522,19 +534,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-329">
-          <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-401">
+        <state relative-caret-position="301">
           <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -550,10 +552,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/testCode1.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/testCode1.jack">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/Main.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/myMain.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/Main.jack">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-336" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="453" column="36" selection-start-line="453" selection-start-column="36" selection-end-line="453" selection-end-column="36" />
+        <state relative-caret-position="264">
+          <caret line="469" column="75" selection-start-line="469" selection-start-column="75" selection-end-line="469" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
