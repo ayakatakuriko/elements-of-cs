@@ -55,8 +55,14 @@ public class JackToknizer {
                         while (next != '\n')
                             this.next = br.read();
                     } else if (next == '*') {
-                        while (next != '/')
+                        while (true) {
                             this.next = br.read();
+                            if (next == '*') {
+                                next = br.read();
+                                if (next == '/')
+                                    break;
+                            }
+                        }
                         this.next = br.read();
                     }
 

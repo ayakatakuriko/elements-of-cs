@@ -31,13 +31,7 @@
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> SquareGame </identifier>
-<symbol> . </symbol>
-<identifier> new </identifier>
-<symbol> ( </symbol>
-<expressionList>
-</expressionList>
-<symbol> ) </symbol>
+<identifier> game </identifier>
 </term>
 </expression>
 <symbol> ; </symbol>
@@ -108,7 +102,7 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<keyword> false </keyword>
+<identifier> i </identifier>
 </term>
 </expression>
 <symbol> ) </symbol>
@@ -120,7 +114,7 @@
 <symbol> = </symbol>
 <expression>
 <term>
-<stringConstant> string constant </stringConstant>
+<identifier> i </identifier>
 </term>
 </expression>
 <symbol> ; </symbol>
@@ -131,7 +125,7 @@
 <symbol> = </symbol>
 <expression>
 <term>
-<keyword> null </keyword>
+<identifier> j </identifier>
 </term>
 </expression>
 <symbol> ; </symbol>
@@ -142,21 +136,14 @@
 <symbol> [ </symbol>
 <expression>
 <term>
-<integerConstant> 1 </integerConstant>
+<identifier> i </identifier>
 </term>
 </expression>
 <symbol> ] </symbol>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> a </identifier>
-<symbol> [ </symbol>
-<expression>
-<term>
-<integerConstant> 2 </integerConstant>
-</term>
-</expression>
-<symbol> ] </symbol>
+<identifier> j </identifier>
 </term>
 </expression>
 <symbol> ; </symbol>
@@ -174,19 +161,6 @@
 <term>
 <identifier> i </identifier>
 </term>
-<symbol> * </symbol>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> - </symbol>
-<term>
-<identifier> j </identifier>
-</term>
-</term>
-</expression>
-<symbol> ) </symbol>
-</term>
 </expression>
 <symbol> ; </symbol>
 </letStatement>
@@ -197,19 +171,6 @@
 <expression>
 <term>
 <identifier> j </identifier>
-</term>
-<symbol> / </symbol>
-<term>
-<symbol> ( </symbol>
-<expression>
-<term>
-<symbol> - </symbol>
-<term>
-<integerConstant> 2 </integerConstant>
-</term>
-</term>
-</expression>
-<symbol> ) </symbol>
 </term>
 </expression>
 <symbol> ; </symbol>

@@ -28,21 +28,45 @@ public class TestCompilationEngine {
     @Test
     public void testSquare() {
         File input = new File("./testFiles/Square/Main.jack");
-        File output = new File("./testFiles/Square/myMain.xml");
+        File output = new File("./testFiles/mySquare/myMain.xml");
         CompilationEngine ce1 = new CompilationEngine(input, output);
 
         ce1.compileClass();
         ce1.closeOutput();
 
         input = new File("./testFiles/Square/Square.jack");
-        output = new File("./testFiles/Square/mySquare.xml");
+        output = new File("./testFiles/mySquare/mySquare.xml");
         CompilationEngine ce2 = new CompilationEngine(input, output);
 
         ce2.compileClass();
         ce2.closeOutput();
 
         input = new File("./testFiles/Square/SquareGame.jack");
-        output = new File("./testFiles/Square/mySquareGame.xml");
+        output = new File("./testFiles/mySquare/mySquareGame.xml");
+        CompilationEngine ce3 = new CompilationEngine(input, output);
+
+        ce3.compileClass();
+        ce3.closeOutput();
+    }
+
+    @Test
+    public void testExpressionLessSquare() {
+        File input = new File("./testFiles/ExpressionLessSquare/Main.jack");
+        File output = new File("./testFiles/myExpressionLessSquare/Main.xml");
+        CompilationEngine ce1 = new CompilationEngine(input, output);
+
+        ce1.compileClass();
+        ce1.closeOutput();
+
+        input = new File("./testFiles/ExpressionLessSquare/Square.jack");
+        output = new File("./testFiles/myExpressionLessSquare/Square.xml");
+        CompilationEngine ce2 = new CompilationEngine(input, output);
+
+        ce2.compileClass();
+        ce2.closeOutput();
+
+        input = new File("./testFiles/ExpressionLessSquare/SquareGame.jack");
+        output = new File("./testFiles/myExpressionLessSquare/SquareGame.xml");
         CompilationEngine ce3 = new CompilationEngine(input, output);
 
         ce3.compileClass();

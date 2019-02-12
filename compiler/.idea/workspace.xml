@@ -12,20 +12,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JackAnalyzer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
+      <file leaf-file-name="JackToknizer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
+            <state relative-caret-position="1134">
+              <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3914#3915#0" expanded="true" />
+                <element signature="e#3947#3948#0" expanded="true" />
+                <element signature="e#6330#6331#0" expanded="true" />
+                <element signature="e#6358#6359#0" expanded="true" />
+                <element signature="e#6385#6386#0" expanded="true" />
+                <element signature="e#6431#6432#0" expanded="true" />
+                <element signature="e#6464#6465#0" expanded="true" />
+                <element signature="e#6513#6514#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestToknizer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/TestToknizer.java">
+      <file leaf-file-name="JackAnalyzer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="203">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -36,30 +47,10 @@
       <file leaf-file-name="TestCompilationEngine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="330">
+              <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JackToknizer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3752#3753#0" expanded="true" />
-                <element signature="e#3785#3786#0" expanded="true" />
-                <element signature="e#5162#5163#0" expanded="true" />
-                <element signature="e#5190#5191#0" expanded="true" />
-                <element signature="e#5217#5218#0" expanded="true" />
-                <element signature="e#5263#5264#0" expanded="true" />
-                <element signature="e#5296#5297#0" expanded="true" />
-                <element signature="e#5345#5346#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,19 +59,12 @@
       <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="469" column="75" selection-start-line="469" selection-start-column="75" selection-end-line="469" selection-end-column="75" />
+            <state relative-caret-position="113">
+              <caret line="220" selection-start-line="220" selection-end-line="220" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.jack" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/Main.jack">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-336" />
           </provider>
         </entry>
       </file>
@@ -107,12 +91,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/JackAnalyzer.java" />
         <option value="$PROJECT_DIR$/testFiles/testCode1.jack" />
         <option value="$PROJECT_DIR$/test/TestToknizer.java" />
-        <option value="$PROJECT_DIR$/src/JackToknizer.java" />
-        <option value="$PROJECT_DIR$/test/TestCompilationEngine.java" />
         <option value="$PROJECT_DIR$/src/CompilationEngine.java" />
+        <option value="$PROJECT_DIR$/test/TestCompilationEngine.java" />
+        <option value="$PROJECT_DIR$/src/JackToknizer.java" />
+        <option value="$PROJECT_DIR$/src/JackAnalyzer.java" />
       </list>
     </option>
   </component>
@@ -137,6 +121,24 @@
             <path>
               <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compiler" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="compiler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compiler" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -148,12 +150,6 @@
               <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
               <item name="compiler" type="462c0819:PsiDirectoryNode" />
               <item name="testFiles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler" type="462c0819:PsiDirectoryNode" />
-              <item name="testFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="ArrayTest" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="compiler" type="b2602c69:ProjectViewProjectNode" />
@@ -173,7 +169,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -187,9 +183,32 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestCompilationEngine.testArrayTest">
+  <component name="RunManager" selected="Application.JackAnalyzer">
+    <configuration name="JackAnalyzer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="JackAnalyzer" />
+      <module name="compiler" />
+      <option name="PROGRAM_PARAMETERS" value="./testFiles/Square" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="TestCompilationEngine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compiler" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestCompilationEngine" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
     </configuration>
     <configuration name="TestCompilationEngine.testArrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compiler" />
@@ -208,6 +227,23 @@
       </option>
       <patterns />
     </configuration>
+    <configuration name="TestCompilationEngine.testExpressionLessSquare" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compiler" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestCompilationEngine" />
+      <option name="METHOD_NAME" value="testExpressionLessSquare" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
     <configuration name="TestCompilationEngine.testSquare" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compiler" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -215,57 +251,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestCompilationEngine" />
       <option name="METHOD_NAME" value="testSquare" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="TestCompilationEngine.testToknizer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="compiler" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestCompilationEngine" />
-      <option name="METHOD_NAME" value="testToknizer" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="TestToknizer.testAdvance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="compiler" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestToknizer" />
-      <option name="METHOD_NAME" value="testAdvance" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="TestToknizer.testHasMoreToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="compiler" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestToknizer" />
-      <option name="METHOD_NAME" value="testHasMoreToken" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -315,19 +300,19 @@
       <listeners />
     </configuration>
     <list>
-      <item itemvalue="JUnit.TestToknizer.testHasMoreToken" />
-      <item itemvalue="JUnit.TestToknizer.testAdvance" />
-      <item itemvalue="JUnit.TestCompilationEngine.testToknizer" />
+      <item itemvalue="Application.JackAnalyzer" />
       <item itemvalue="JUnit.TestCompilationEngine.testArrayTest" />
       <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
+      <item itemvalue="JUnit.TestCompilationEngine.testExpressionLessSquare" />
+      <item itemvalue="JUnit.TestCompilationEngine" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestCompilationEngine.testArrayTest" />
-        <item itemvalue="JUnit.TestCompilationEngine.testToknizer" />
+        <item itemvalue="Application.JackAnalyzer" />
         <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
-        <item itemvalue="JUnit.TestToknizer.testAdvance" />
-        <item itemvalue="JUnit.TestToknizer.testHasMoreToken" />
+        <item itemvalue="JUnit.TestCompilationEngine" />
+        <item itemvalue="JUnit.TestCompilationEngine.testExpressionLessSquare" />
+        <item itemvalue="JUnit.TestCompilationEngine.testArrayTest" />
       </list>
     </recent_temporary>
   </component>
@@ -345,40 +330,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 46m 35s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.12 at 19h 54m 29s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 47m 42s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.12 at 19h 57m 22s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 49m 13s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 19h 59m 52s.xml">
+      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 53m 57s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 00m 30s.xml">
+      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 56m 34s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 04m 10s.xml">
+      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 58m 33s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 07m 02s.xml">
+      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 58m 50s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 07m 32s.xml">
+      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 18h 59m 55s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 11m 23s.xml">
+      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 19h 00m 13s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine - 2019.02.12 at 20h 16m 22s.xml">
+      <configuration name="TestCompilationEngine" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.12 at 19h 04m 39s.xml">
-      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.12 at 20h 41m 58s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -391,17 +375,17 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.2576687" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.12883435" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.26993865" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17397882" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.36081696" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297546" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.398773" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.398773" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -422,19 +406,31 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/TestCompilationEngine.java</url>
-          <line>23</line>
+          <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
+          <line>220</line>
           <properties />
-          <option name="timeStamp" value="25" />
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
-          <line>302</line>
+          <url>file://$PROJECT_DIR$/test/TestCompilationEngine.java</url>
+          <line>40</line>
           <properties />
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/TestCompilationEngine.java</url>
+          <line>55</line>
+          <properties />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/JackAnalyzer.java</url>
+          <line>41</line>
+          <properties />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -461,14 +457,14 @@
           <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3752#3753#0" expanded="true" />
-            <element signature="e#3785#3786#0" expanded="true" />
-            <element signature="e#5162#5163#0" expanded="true" />
-            <element signature="e#5190#5191#0" expanded="true" />
-            <element signature="e#5217#5218#0" expanded="true" />
-            <element signature="e#5263#5264#0" expanded="true" />
-            <element signature="e#5296#5297#0" expanded="true" />
-            <element signature="e#5345#5346#0" expanded="true" />
+            <element signature="e#3914#3915#0" expanded="true" />
+            <element signature="e#3947#3948#0" expanded="true" />
+            <element signature="e#6330#6331#0" expanded="true" />
+            <element signature="e#6358#6359#0" expanded="true" />
+            <element signature="e#6385#6386#0" expanded="true" />
+            <element signature="e#6431#6432#0" expanded="true" />
+            <element signature="e#6464#6465#0" expanded="true" />
+            <element signature="e#6513#6514#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -510,13 +506,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="65" selection-start-line="10" selection-start-column="65" selection-end-line="10" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testFiles/testCode1T.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -530,24 +519,6 @@
           <caret line="49" selection-start-line="49" selection-end-line="49" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="163" column="35" selection-start-line="163" selection-start-column="35" selection-end-line="163" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3752#3753#0" expanded="true" />
-            <element signature="e#3785#3786#0" expanded="true" />
-            <element signature="e#5162#5163#0" expanded="true" />
-            <element signature="e#5190#5191#0" expanded="true" />
-            <element signature="e#5217#5218#0" expanded="true" />
-            <element signature="e#5263#5264#0" expanded="true" />
-            <element signature="e#5296#5297#0" expanded="true" />
-            <element signature="e#5345#5346#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -568,25 +539,78 @@
     <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/myMain.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/Main.jack">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-336" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/myExpressionLessSquare/Square.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/myExpressionLessSquare/SquareGame.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ExpressionLessSquare/Square.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ExpressionLessSquare/SquareGame.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/ExpressionLessSquare/Main.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testFiles/myExpressionLessSquare/Main.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/module-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="1" lean-forward="true" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1134">
+          <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3914#3915#0" expanded="true" />
+            <element signature="e#3947#3948#0" expanded="true" />
+            <element signature="e#6330#6331#0" expanded="true" />
+            <element signature="e#6358#6359#0" expanded="true" />
+            <element signature="e#6385#6386#0" expanded="true" />
+            <element signature="e#6431#6432#0" expanded="true" />
+            <element signature="e#6464#6465#0" expanded="true" />
+            <element signature="e#6513#6514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="330">
+          <caret line="41" column="8" lean-forward="true" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testFiles/ArrayTest/Main.jack">
+    <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-336" />
+        <state relative-caret-position="203">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="469" column="75" selection-start-line="469" selection-start-column="75" selection-end-line="469" selection-end-column="75" />
+        <state relative-caret-position="113">
+          <caret line="220" selection-start-line="220" selection-end-line="220" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

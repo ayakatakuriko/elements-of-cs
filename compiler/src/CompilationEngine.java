@@ -206,11 +206,10 @@ public class CompilationEngine {
 
     public void compileParameterList() {
         writeCode("<parameterList>\n");
-        if (jt.tokenType() == JackToknizer.KEYWORD &&
+        if (jt.tokenType() == JackToknizer.KEYWORD ||
                 jt.tokenType() == JackToknizer.IDENTIFIER) {
 
             /* type */
-            jt.advance();
             writeToken();
             /* var Name */
             jt.advance();
@@ -246,7 +245,7 @@ public class CompilationEngine {
             /* ( */
             writeToken();
             jt.advance();
-            compileExpression();
+            compileExpressionList();
             /* ) */
             writeToken();
 
@@ -360,7 +359,7 @@ public class CompilationEngine {
             jt.advance();
             writeToken();
             jt.advance();
-            compileExpression();
+            compileStatements();
             /* } */
             writeToken();
             jt.advance();
@@ -409,9 +408,7 @@ public class CompilationEngine {
                 jt.advance();
                 break;
             case JackToknizer.KEYWORD:
-                writeCode("<KeywordConstant>\n");
                 writeToken();
-                writeCode("</KeywordConstant>\n");
                 jt.advance();
                 break;
             case JackToknizer.IDENTIFIER:
