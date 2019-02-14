@@ -18,7 +18,7 @@ public class TestCompilationEngine {
     @Test
     public void testArrayTest() {
         File input = new File("./testFiles/ArrayTest/Main.jack");
-        File output = new File("./testFiles/ArrayTest/myMain.xml");
+        File output = new File("./testFiles/ArrayTest/Main.vm");
         CompilationEngine ce = new CompilationEngine(input, output);
 
         ce.compileClass();
@@ -28,21 +28,21 @@ public class TestCompilationEngine {
     @Test
     public void testSquare() {
         File input = new File("./testFiles/Square/Main.jack");
-        File output = new File("./testFiles/mySquare/myMain.xml");
+        File output = new File("./testFiles/mySquare/myMain.vm");
         CompilationEngine ce1 = new CompilationEngine(input, output);
 
         ce1.compileClass();
         ce1.closeOutput();
 
         input = new File("./testFiles/Square/Square.jack");
-        output = new File("./testFiles/mySquare/mySquare.xml");
+        output = new File("./testFiles/mySquare/mySquare.vm");
         CompilationEngine ce2 = new CompilationEngine(input, output);
 
         ce2.compileClass();
         ce2.closeOutput();
 
         input = new File("./testFiles/Square/SquareGame.jack");
-        output = new File("./testFiles/mySquare/mySquareGame.xml");
+        output = new File("./testFiles/mySquare/mySquareGame.vm");
         CompilationEngine ce3 = new CompilationEngine(input, output);
 
         ce3.compileClass();

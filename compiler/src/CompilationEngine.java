@@ -9,22 +9,25 @@ public class CompilationEngine {
     private JackToknizer jt;
     private HashMap<Integer, String> keywordMap;
     private HashSet<String> opSet;
-    private String preToken;
     private SymbolTable st;
     private String type, name, className;
     private int kind;
     private VMWriter vm;
+    private int nLocals, nArgs;
+    private HashMap<String, Integer> funcMap;
+    private int label;
 
     public CompilationEngine(File input, File output) {
+        label = 0;
+        funcMap = new HashMap<>();
         st = new SymbolTable();
         jt = new JackToknizer(input);
-        vm = new VMWriter(output);
-        preToken = null;
         try {
             writer = new FileWriter(output, true);
         } catch (IOException e) {
             System.out.println(e);
         }
+        vm = new VMWriter(writer);
         keywordMap = new HashMap<>();
         keywordMap.put(JackToknizer.CLASS, "class");
         keywordMap.put(JackToknizer.CONSTRUCTOR, "constructor");
@@ -61,17 +64,14 @@ public class CompilationEngine {
     }
 
     public void compileClass() {
-        writeCode("<class>\n");
         /* class */
         jt.advance();
-        writeToken();
         /* class name*/
         jt.advance();
         className = jt.identifier();
-        writeToken();
         /* { */
         jt.advance();
-        writeToken();
+        /* classVerDec*/
         jt.advance();
         while (jt.tokenType() == JackToknizer.KEYWORD &&
                 (jt.keyWord() == JackToknizer.STATIC ||
@@ -79,7 +79,6 @@ public class CompilationEngine {
             compileClassVarDec();
             jt.advance();
         }
-
         while (jt.tokenType() == JackToknizer.KEYWORD &&
                 (jt.keyWord() == JackToknizer.CONSTRUCTOR ||
                         jt.keyWord() == JackToknizer.FUNCTION ||
@@ -88,89 +87,80 @@ public class CompilationEngine {
             jt.advance();
         }
         /* } */
-        writeToken();
-
-        writeCode("</class>\n");
     }
 
     public void compileClassVarDec() {
-        writeCode("<classVarDec>\n");
-        writeNotDefinedAttributes(false, false);
+        define(false, false);
         jt.advance();
         while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
             /* , */
-            writeToken();
             /* var Name*/
             jt.advance();
-            writeNotDefinedAttributes(false, true);
+            define(false, true);
             jt.advance();
         }
         /* ; */
-        writeToken();
-        writeCode("</classVarDec>\n");
     }
 
     public void compileSubroutine() {
+        int kindOfSubroutine;
+        nArgs = nLocals = 0;
+        String funcName;
         st.startSubroutine(className);
-        writeCode("<subroutineDec>\n");
         /* constructor | function | method */
-        writeToken();
+        kindOfSubroutine = jt.keyWord();
         /* void | type */
         jt.advance();
-        writeToken();
         /* subroutineName */
         jt.advance();
-        writeToken();
+        funcName = jt.identifier();
         /* ( */
         jt.advance();
-        writeToken();
-
+        /* paramList */
         jt.advance();
+        if (kindOfSubroutine == JackToknizer.METHOD) nArgs++;
         compileParameterList();
-
+        /* Add function and number of args to map*/
+        funcMap.put(funcName, kindOfSubroutine);
         /* ) */
-        writeToken();
-
-        writeCode("<subroutineBody>\n");
         /* { */
         jt.advance();
-        writeToken();
-
+        /*varDec*/
         jt.advance();
         while (jt.tokenType() == JackToknizer.KEYWORD &&
                 jt.keyWord() == JackToknizer.VAR) {
             compileVarDec();
             jt.advance();
         }
-
+        vm.writeFunction(className + "." + funcName, nLocals);
+        if (kindOfSubroutine == JackToknizer.CONSTRUCTOR) {
+            writeCode("push constant " + nLocals + "\n" +
+                    "call Memory.alloc 1\npop pointer 0\n");
+        } else if (kindOfSubroutine == JackToknizer.METHOD) {
+            writeCode("push argument 0\npop pointer 0\n");
+        }
         compileStatements();
 
         /* } */
-        writeToken();
-        writeCode("</subroutineBody>\n");
-        writeCode("</subroutineDec>\n");
     }
 
     public void compileVarDec() {
-        writeCode("<varDec>\n");
-        writeNotDefinedAttributes(false, false);
+        define(false, false);
+        nLocals++;
 
         jt.advance();
         while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
             /* , */
-            writeToken();
             /* var Name*/
             jt.advance();
-            writeNotDefinedAttributes(false, true);
+            define(false, true);
             jt.advance();
+            nLocals++;
         }
         /* ; */
-        writeToken();
-        writeCode("</varDec>\n");
     }
 
     public void compileStatements() {
-        writeCode("<statements>\n");
         while (jt.tokenType() == JackToknizer.KEYWORD) {
             switch (jt.keyWord()) {
                 case JackToknizer.LET:
@@ -194,278 +184,388 @@ public class CompilationEngine {
                     break;
             }
         }
-        writeCode("</statements>\n");
     }
 
     public void compileParameterList() {
-        writeCode("<parameterList>\n");
         if (jt.tokenType() == JackToknizer.KEYWORD ||
                 jt.tokenType() == JackToknizer.IDENTIFIER) {
-
-            writeNotDefinedAttributes(true, false);
+            define(true, false);
 
             jt.advance();
             while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
                 /* , */
-                writeToken();
                 /* type */
                 jt.advance();
-                writeNotDefinedAttributes(true, false);
+                define(true, false);
                 jt.advance();
             }
         }
-        writeCode("</parameterList>\n");
     }
 
     public void compileDo() {
-        writeCode("<doStatement>\n");
+        String caller;
+        String subroutine;
+        nArgs = 0;
         /* do */
-        writeToken();
-
         /* subroutineName | className | varName */
         jt.advance();
-        if (st.kindOf(jt.identifier()) == SymbolTable.NONE)
-            writeToken();
-        else
-            writeDefinedAttributes(jt.identifier(), false);
-
+        caller = jt.identifier();
         jt.advance();
         if (jt.symbol().equals("(")) {
+            /*同一クラス内の関数を実行*/
+            if (funcMap.get(caller) == JackToknizer.METHOD) {
+                vm.writePush(VMWriter.POINTER, 0);
+                nArgs++;
+            }
             /* ( */
-            writeToken();
             jt.advance();
             compileExpressionList();
+            vm.writeCall(className + "." + caller, nArgs);
             /* ) */
-            writeToken();
-
         } else if (jt.symbol().equals(".")) {
+            if (st.kindOf(caller) != SymbolTable.NONE) {
+                /* XXX.yyy()の形でXXXがテーブルにある=XXXはインスタンスかつyyyはメソッド */
+                nArgs++;
+                switch (st.kindOf(caller)) {
+                    case SymbolTable.ARG:
+                        vm.writePush(VMWriter.ARG, st.indexOf(caller));
+                        break;
+                    case SymbolTable.STATIC:
+                        vm.writePush(VMWriter.STATIC, st.indexOf(caller));
+                        break;
+                    case SymbolTable.VAR:
+                    case SymbolTable.FIELD:
+                        vm.writePush(VMWriter.LOCAL, st.indexOf(caller));
+                }
+            }
             /* . */
-            writeToken();
             /* subroutineName */
             jt.advance();
-            writeToken();
+            subroutine = jt.identifier();
             /* ( */
             jt.advance();
-            writeToken();
             jt.advance();
             compileExpressionList();
+            vm.writeCall(caller + "." + subroutine, nArgs);
             /* ) */
-            writeToken();
         }
 
         /* ; */
         jt.advance();
-        writeToken();
-        writeCode("</doStatement>\n");
     }
 
     public void compileLet() {
-        writeCode("<letStatement>\n");
+        String assigned;
+        boolean isArray = false;
         /* let */
-        writeToken();
         /* varName */
         jt.advance();
-        writeDefinedAttributes(jt.identifier(), false);
+        assigned = jt.identifier();
 
         jt.advance();
         if (jt.tokenType() == JackToknizer.SYMBOL &&
                 jt.symbol().equals("[")) {
-            writeToken();
             jt.advance();
             compileExpression();
-
+            /* インデックスをtemp0に退避*/
+            vm.writePop(VMWriter.TEMP, 0);
             /* ] */
-            writeToken();
             jt.advance();
+            isArray = true;
         }
         /* = */
-        writeToken();
         jt.advance();
         compileExpression();
+
+        if (isArray) {
+            vm.writePush(VMWriter.TEMP, 0);
+
+            switch (st.kindOf(assigned)) {
+                case SymbolTable.ARG:
+                    vm.writePush(VMWriter.ARG, st.indexOf(assigned));
+                    break;
+                case SymbolTable.STATIC:
+                    vm.writePush(VMWriter.STATIC, st.indexOf(assigned));
+                    break;
+                case SymbolTable.VAR:
+                case SymbolTable.FIELD:
+                    vm.writePush(VMWriter.LOCAL, st.indexOf(assigned));
+            }
+
+            vm.writeArithmetic(VMWriter.ADD);
+            vm.writePop(VMWriter.POINTER, 1);
+            vm.writePop(VMWriter.THAT, 0);
+        } else {
+            switch (st.kindOf(assigned)) {
+                case SymbolTable.ARG:
+                    vm.writePop(VMWriter.ARG, st.indexOf(assigned));
+                    break;
+                case SymbolTable.STATIC:
+                    vm.writePop(VMWriter.STATIC, st.indexOf(assigned));
+                    break;
+                case SymbolTable.VAR:
+                case SymbolTable.FIELD:
+                    vm.writePop(VMWriter.LOCAL, st.indexOf(assigned));
+            }
+        }
         /* ; */
-        writeToken();
-        writeCode("</letStatement>\n");
     }
 
     public void compileWhile() {
-        writeCode("<whileStatement>\n");
+        int label = this.label++;
         /* while */
-        writeToken();
+        vm.writeLabel("WHILE" + label);
         /* ( */
         jt.advance();
-        writeToken();
         jt.advance();
         compileExpression();
+        vm.writeArithmetic(VMWriter.NOT);
         /* ) */
-        writeToken();
+        vm.writeIf("INSIDE_WHILE" + label);
         /* { */
         jt.advance();
-        writeToken();
         jt.advance();
         compileStatements();
+        vm.writeGoto("WHILE" + label);
+        vm.writeLabel("INSIDE_WHILE" + label);
         /* } */
-        writeToken();
-        writeCode("</whileStatement>\n");
     }
 
     public void compileReturn() {
-        writeCode("<returnStatement>\n");
         /* return */
-        writeToken();
         jt.advance();
         if (jt.tokenType() != JackToknizer.SYMBOL) {
             compileExpression();
+        } else {
+            // return の後に何もないので、0をpush
+            vm.writePush(VMWriter.CONST, 0);
         }
+        vm.writeReturn();
         /* ; */
-        writeToken();
-        writeCode("</returnStatement>\n");
     }
 
     public void compileIf() {
-        writeCode("<ifStatement>\n");
+        int label = this.label++;
         /* if */
-        writeToken();
         /* ( */
         jt.advance();
-        writeToken();
         jt.advance();
         compileExpression();
+        vm.writeArithmetic(VMWriter.NOT);
         /* ) */
-        writeToken();
         /* { */
         jt.advance();
-        writeToken();
         jt.advance();
+        vm.writeIf("IF" + label);
         compileStatements();
         /* } */
-        writeToken();
-
+        vm.writeGoto("ELSE" + label);
+        vm.writeLabel("IF" + label);
         jt.advance();
         if (jt.tokenType() == JackToknizer.KEYWORD && jt.keyWord() == JackToknizer.ELSE) {
             /* else */
-            writeToken();
             /* { */
             jt.advance();
-            writeToken();
             jt.advance();
             compileStatements();
             /* } */
-            writeToken();
             jt.advance();
         }
-        writeCode("</ifStatement>\n");
+        vm.writeLabel("ELSE" + label);
     }
 
     public void compileExpression() {
-        writeCode("<expression>\n");
+        String op;
         compileTerm();
         while (jt.tokenType() == JackToknizer.SYMBOL && opSet.contains(jt.symbol())) {
             /* op */
-            writeToken();
+            op = jt.symbol();
             jt.advance();
             compileTerm();
+            compileOp(op);
         }
-        writeCode("</expression>\n");
+    }
+
+    private void compileOp(String op) {
+        switch (op) {
+            case "=":
+                vm.writeArithmetic(VMWriter.EQ);
+                break;
+            case "+":
+                vm.writeArithmetic(VMWriter.ADD);
+                break;
+            case "-":
+                vm.writeArithmetic(VMWriter.SUB);
+                break;
+            case "*":
+                vm.writeCall("Math.multiply", 2);
+                break;
+            case "/":
+                vm.writeCall("Math.divide", 2);
+                break;
+            case "&":
+                vm.writeArithmetic(VMWriter.AND);
+                break;
+            case "|":
+                vm.writeArithmetic(VMWriter.OR);
+                break;
+            case "<":
+                vm.writeArithmetic(VMWriter.LT);
+                break;
+            case ">":
+                vm.writeArithmetic(VMWriter.GT);
+                break;
+        }
     }
 
     public void compileTerm() {
-        writeCode("<term>\n");
+        String op;
+        String pre;
         switch (jt.tokenType()) {
             case JackToknizer.SYMBOL:
                 if (jt.symbol().equals("(")) {
                     /* (expression) */
                     /* ( */
-                    writeToken();
                     jt.advance();
                     compileExpression();
                     /* ) */
-                    writeToken();
                     jt.advance();
                 } else {
+                    op = jt.symbol();
                     /* unaryOp term */
-                    writeToken();
                     jt.advance();
                     compileTerm();
+                    switch (op) {
+                        case "~":
+                            vm.writeArithmetic(VMWriter.NOT);
+                            break;
+                        case "-":
+                            vm.writeArithmetic(VMWriter.NEG);
+                            break;
+                    }
                 }
                 break;
             case JackToknizer.INT_CONST:
-                writeToken();
+                vm.writePush(VMWriter.CONST, jt.intVal());
                 jt.advance();
                 break;
             case JackToknizer.STRING_CONST:
-                writeToken();
+                vm.writePush(VMWriter.CONST, jt.stringVal().length());
+                vm.writeCall("String.new", 1);
+                for (int i = 0; i < jt.stringVal().length(); i++) {
+                    vm.writePush(VMWriter.CONST, (int) jt.stringVal().charAt(i));
+                    writeCode("call String.appendChar 2\n");
+                }
                 jt.advance();
                 break;
             case JackToknizer.KEYWORD:
-                if (jt.keyWord() == JackToknizer.THIS) {
-                    writeDefinedAttributes("this", false);
-                } else {
-                    writeToken();
+                switch (jt.keyWord()) {
+                    case JackToknizer.THIS:
+                        vm.writePush(VMWriter.POINTER, 0);
+                        break;
+                    case JackToknizer.NULL:
+                    case JackToknizer.FALSE:
+                        vm.writePush(VMWriter.CONST, 0);
+                        break;
+                    case JackToknizer.TRUE:
+                        vm.writePush(VMWriter.CONST, 1);
+                        vm.writeArithmetic(VMWriter.NEG);
                 }
                 jt.advance();
                 break;
             case JackToknizer.IDENTIFIER:
-                preToken = jt.identifier();
+                pre = jt.identifier();
                 jt.advance();
-                if (jt.tokenType() == JackToknizer.SYMBOL) {
-                    if (jt.symbol().equals("(")) {
-                        /* subroutineCall */
-                        writeCode("<identifier> " + preToken + " </identifier>\n");
-                        /* ( */
-                        writeToken();
-                        jt.advance();
-                        compileExpression();
-                        /* ) */
-                        writeToken();
-                        jt.advance();
-                        break;
-                    } else if (jt.symbol().equals(".")) {
-                        /* subroutineCall */
-                        writeCode("<identifier> " + preToken + " </identifier>\n");
-                        /* . */
-                        writeToken();
-                        /* subroutineName */
-                        jt.advance();
-                        writeToken();
-                        /* ( */
-                        jt.advance();
-                        writeToken();
-                        jt.advance();
-                        compileExpressionList();
-                        /* ) */
-                        writeToken();
-                        jt.advance();
-                        break;
-                    } else if (jt.symbol().equals("[")) {
-                       /* varName [expression] */
-                        writeDefinedAttributes(preToken, false);
-                        /* [ */
-                        writeToken();
-                        jt.advance();
-                        compileExpression();
-                        /* ] */
-                        writeToken();
-                        jt.advance();
-                        break;
+                if (jt.symbol().equals("(")) {
+                    nArgs = 0;
+                    /*同一クラス内の関数を実行*/
+                    if (funcMap.get(pre) == JackToknizer.METHOD) {
+                        vm.writePush(VMWriter.POINTER, 0);
+                        nArgs++;
+                    }
+                    /* ( */
+                    jt.advance();
+                    compileExpressionList();
+                    vm.writeCall(className + "." + pre, nArgs);
+                    /* ) */
+                } else if (jt.symbol().equals(".")) {
+                    nArgs = 0;
+                    if (st.kindOf(pre) != SymbolTable.NONE) {
+                        /* XXX.yyy()の形でXXXがテーブルにある=XXXはインスタンスかつyyyはメソッド */
+                        nArgs++;
+                        switch (st.kindOf(pre)) {
+                            case SymbolTable.ARG:
+                                vm.writePush(VMWriter.ARG, st.indexOf(pre));
+                                break;
+                            case SymbolTable.STATIC:
+                                vm.writePush(VMWriter.STATIC, st.indexOf(pre));
+                                break;
+                            case SymbolTable.VAR:
+                            case SymbolTable.FIELD:
+                                vm.writePush(VMWriter.LOCAL, st.indexOf(pre));
+                        }
+                    }
+                    /* . */
+                    /* subroutineName */
+                    jt.advance();
+                    String subroutine = jt.identifier();
+                    /* ( */
+                    jt.advance();
+                    jt.advance();
+                    compileExpressionList();
+                    vm.writeCall(pre + "." + subroutine, nArgs);
+                    /* ) */
+                    jt.advance();
+                } else if (jt.symbol().equals("[")) {
+                    /* varName [expression] */
+                    switch (st.kindOf(pre)) {
+                        case SymbolTable.ARG:
+                            vm.writePush(VMWriter.ARG, st.indexOf(pre));
+                            break;
+                        case SymbolTable.STATIC:
+                            vm.writePush(VMWriter.STATIC, st.indexOf(pre));
+                            break;
+                        case SymbolTable.VAR:
+                        case SymbolTable.FIELD:
+                            vm.writePush(VMWriter.LOCAL, st.indexOf(pre));
+                    }
+                    /* [ */
+                    jt.advance();
+                    compileExpression();
+                    /* ] */
+                    vm.writeArithmetic(VMWriter.ADD);
+                    vm.writePop(VMWriter.POINTER, 1);
+                    vm.writePush(VMWriter.THAT, 0);
+                    jt.advance();
+                    break;
+                } else {
+                    /* varName */
+                    switch (st.kindOf(pre)) {
+                        case SymbolTable.ARG:
+                            vm.writePush(VMWriter.ARG, st.indexOf(pre));
+                            break;
+                        case SymbolTable.STATIC:
+                            vm.writePush(VMWriter.STATIC, st.indexOf(pre));
+                            break;
+                        case SymbolTable.VAR:
+                        case SymbolTable.FIELD:
+                            vm.writePush(VMWriter.LOCAL, st.indexOf(pre));
                     }
                 }
-                /* varName */
-                writeDefinedAttributes(preToken, false);
         }
-        writeCode("</term>\n");
     }
 
+
     public void compileExpressionList() {
-        writeCode("<expressionList>\n");
         if (jt.tokenType() != JackToknizer.SYMBOL || !jt.symbol().equals(")")) {
+            nArgs++;
             compileExpression();
             while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
-                writeToken();
                 jt.advance();
                 compileExpression();
+                nArgs++;
             }
         }
-        writeCode("</expressionList>\n");
     }
 
     private void writeToken() {
@@ -510,7 +610,7 @@ public class CompilationEngine {
     }
 
     /* シンボルテーブルにすでに登録されたものを書く。
-    * トークナイザは進まない*/
+     * トークナイザは進まない*/
     private void writeDefinedAttributes(String name, boolean isVar) {
         String kind;
         String stat = (isVar) ? "defined" : "used";
@@ -534,13 +634,13 @@ public class CompilationEngine {
 
         writeCode("<attribute>\n\t(name: " + name + ", kind: " + kind + ", type: " +
                 st.typeOf(name) + ", index: " +
-                st.indexOf(name) + ", "+ stat +")\n</attribute>\n");
+                st.indexOf(name) + ", " + stat + ")\n</attribute>\n");
     }
 
     /*
-    * isSameAsBeforeがtrueなら、type, kindeが1つ前のものと同じ状態で登録される
-    * トークナイザは識別しを読み込んだ状態で止まる
-    * */
+     * isSameAsBeforeがtrueなら、type, kindeが1つ前のものと同じ状態で登録される
+     * トークナイザは識別しを読み込んだ状態で止まる
+     * */
     private void writeNotDefinedAttributes(boolean isArg, boolean isSameAsBefore) {
         if (isSameAsBefore) {
             /* name*/
@@ -562,9 +662,9 @@ public class CompilationEngine {
                 case JackToknizer.VAR:
                     kind = SymbolTable.VAR;
                     break;
-                 default:
-                     writeCode("<ERROR> writeNotDefinedAttributes </ERROR>\n");
-                     return;
+                default:
+                    writeCode("<ERROR> writeNotDefinedAttributes </ERROR>\n");
+                    return;
             }
             jt.advance();
         }
@@ -576,6 +676,50 @@ public class CompilationEngine {
         name = jt.identifier();
         st.define(name, type, kind);
         writeDefinedAttributes(name, true);
+    }
+
+    private void define(boolean isArg, boolean isSameAsBefore) {
+        if (isSameAsBefore) {
+            /* name*/
+            name = jt.identifier();
+            st.define(name, type, kind);
+            return;
+        }
+
+        if (isArg) kind = SymbolTable.ARG;
+        else {
+            switch (jt.keyWord()) {
+                case JackToknizer.FIELD:
+                    kind = SymbolTable.FIELD;
+                    break;
+                case JackToknizer.STATIC:
+                    kind = SymbolTable.STATIC;
+                    break;
+                case JackToknizer.VAR:
+                    kind = SymbolTable.VAR;
+                    break;
+                default:
+                    return;
+            }
+            jt.advance();
+        }
+        /* type */
+        type = (jt.tokenType() == JackToknizer.KEYWORD) ?
+                keywordMap.get(jt.keyWord()) : jt.identifier();
+        jt.advance();
+        /* name*/
+        name = jt.identifier();
+        st.define(name, type, kind);
+    }
+
+    private class SubroutineData {
+        private int args;
+        private int type;
+
+        public SubroutineData(int args, int type) {
+            this.args = args;
+            this.type = type;
+        }
     }
 }
 

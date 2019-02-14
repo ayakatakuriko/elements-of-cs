@@ -3,7 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class VMWriter {
-    private File output;
     private FileWriter writer;
     public static final int CONST = 400;
     public static final int ARG = 401;
@@ -24,13 +23,8 @@ public class VMWriter {
     public static final int OR = 507;
     public static final int NOT = 508;
 
-    public VMWriter(File output) {
-        this.output = output;
-        try {
-            writer = new FileWriter(this.output, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public VMWriter(FileWriter writer) {
+        this.writer = writer;
     }
 
     public void writePush(int segment, int index) {
@@ -44,7 +38,7 @@ public class VMWriter {
                 code += "argument ";
                 break;
             case LOCAL:
-                code += "local";
+                code += "local ";
                 break;
             case STATIC:
                 code += "static ";
@@ -56,7 +50,7 @@ public class VMWriter {
                 code += "that ";
                 break;
             case POINTER:
-                code += "pointer";
+                code += "pointer ";
                 break;
             case TEMP:
                 code += "temp ";
@@ -74,7 +68,7 @@ public class VMWriter {
                 code += "argument ";
                 break;
             case LOCAL:
-                code += "local";
+                code += "local ";
                 break;
             case STATIC:
                 code += "static ";
@@ -86,7 +80,7 @@ public class VMWriter {
                 code += "that ";
                 break;
             case POINTER:
-                code += "pointer";
+                code += "pointer ";
                 break;
             case TEMP:
                 code += "temp ";
@@ -149,11 +143,11 @@ public class VMWriter {
     }
 
     public void writeFunction(String name, int nLocals) {
-        writeCode("function " + name + " " + name + "\n");
+        writeCode("function " + name + " " + nLocals + "\n");
     }
 
     public void writeReturn() {
-        writeCode("return");
+        writeCode("return\n");
     }
 
     public void close() {
