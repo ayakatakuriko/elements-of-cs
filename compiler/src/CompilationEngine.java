@@ -10,8 +10,10 @@ public class CompilationEngine {
     private HashMap<Integer, String> keywordMap;
     private HashSet<String> opSet;
     private String preToken;
+    private SymbolTable st;
 
     public CompilationEngine(File input, File output) {
+        st = new SymbolTable();
         jt = new JackToknizer(input);
         preToken = null;
         try {
@@ -516,5 +518,64 @@ public class CompilationEngine {
         }
     }
 
+    /* シンボルテーブルにすでに登録されたものを書く。
+    * トークナイザは進まない*/
+    private void writeDefinedAttributes(String name, boolean isVar) {
+        String kind;
+        String stat = (isVar) ? "defined" : "used";
+
+        switch (st.kindOf(name)) {
+            case SymbolTable.STATIC:
+                kind = "static";
+                break;
+            case SymbolTable.ARG:
+                kind = "arg";
+                break;
+            case SymbolTable.FIELD:
+                kind = "field";
+                break;
+            case SymbolTable.VAR:
+                kind = "var";
+                break;
+            default:
+                return;
+        }
+
+        writeCode("<attribute>\n\t(kind: " + kind + "type: " +
+                st.typeOf(name) + ", index: " +
+                st.indexOf(name) + ", "+ stat +")\n</attribute>\n");
+    }
+
+    private void writeNotDefinedAttributes(boolean isArg) {
+        String type, name;
+        int kind;
+
+        if (isArg) kind = SymbolTable.ARG;
+        else {
+            switch (jt.keyWord()) {
+                case JackToknizer.FIELD:
+                    kind = SymbolTable.FIELD;
+                    break;
+                case JackToknizer.STATIC:
+                    kind = SymbolTable.STATIC;
+                    break;
+                case JackToknizer.VAR:
+                    kind = SymbolTable.VAR;
+                    break;
+                 default:
+                     writeCode("<ERROR> writeNotDefinedAttributes </ERROR>\n");
+                     return;
+            }
+            jt.advance();
+        }
+        /* type */
+        type = (jt.tokenType() == JackToknizer.KEYWORD) ?
+                keywordMap.get(jt.keyWord()) : jt.identifier();
+        jt.advance();
+        /* name*/
+        name = jt.identifier();
+        st.define(name, type, kind);
+        writeDefinedAttributes(name, true);
+    }
 }
 

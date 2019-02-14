@@ -1,11 +1,11 @@
 import java.util.LinkedList;
 
 public class SymbolTable {
-    public final int STATIC = 300;
-    public final int FIELD = 301;
-    public final int ARG = 302;
-    public final int VAR = 303;
-    public final int NONE = 304;
+    public static final int STATIC = 300;
+    public static final int FIELD = 301;
+    public static final int ARG = 302;
+    public static final int VAR = 303;
+    public static final int NONE = 304;
     private LinkedList<Symbol> classTable;
     private LinkedList<Symbol> subroutineTable;
     /* Current index */
@@ -68,13 +68,13 @@ public class SymbolTable {
     public int varCount(int kind) {
         switch (kind) {
             case STATIC:
-                return staticIndex;
+                return staticIndex + 1;
             case FIELD:
-                return fieldIndex;
+                return fieldIndex + 1;
             case ARG:
-                return argIndex;
+                return argIndex + 1;
             case VAR:
-                return varIndex;
+                return varIndex + 1;
         }
         return -1;
     }
