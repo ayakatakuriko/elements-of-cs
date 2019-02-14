@@ -1,0 +1,1398 @@
+<class>
+<keyword> class </keyword>
+<identifier> Square </identifier>
+<symbol> { </symbol>
+<classVarDec>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, defined)
+</attribute>
+<symbol> , </symbol>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, defined)
+</attribute>
+<symbol> ; </symbol>
+</classVarDec>
+<classVarDec>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, defined)
+</attribute>
+<symbol> ; </symbol>
+</classVarDec>
+<subroutineDec>
+<keyword> constructor </keyword>
+<identifier> Square </identifier>
+<identifier> new </identifier>
+<symbol> ( </symbol>
+<parameterList>
+<attribute>
+	(name: Ax, kind: arg, type: int, index: 1, defined)
+</attribute>
+<symbol> , </symbol>
+<attribute>
+	(name: Ay, kind: arg, type: int, index: 2, defined)
+</attribute>
+<symbol> , </symbol>
+<attribute>
+	(name: Asize, kind: arg, type: int, index: 3, defined)
+</attribute>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: Ax, kind: arg, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: Ay, kind: arg, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: Asize, kind: arg, type: int, index: 3, used)
+</attribute>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> draw </identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<expression>
+<term>
+<attribute>
+	(name: this, kind: arg, type: Square, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> dispose </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Memory </identifier>
+<symbol> . </symbol>
+<identifier> deAlloc </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: this, kind: arg, type: Square, index: 0, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> draw </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> erase </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> incSize </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> &lt; </symbol>
+<term>
+<integerConstant> 254 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> &amp; </symbol>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> &lt; </symbol>
+<term>
+<integerConstant> 510 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> erase </identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> draw </identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> decSize </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+<symbol> &gt; </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> erase </identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> draw </identifier>
+<symbol> ( </symbol>
+<expressionList>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> moveUp </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> &gt; </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> moveDown </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> &lt; </symbol>
+<term>
+<integerConstant> 254 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> moveLeft </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> &gt; </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<subroutineDec>
+<keyword> method </keyword>
+<keyword> void </keyword>
+<identifier> moveRight </identifier>
+<symbol> ( </symbol>
+<parameterList>
+</parameterList>
+<symbol> ) </symbol>
+<subroutineBody>
+<symbol> { </symbol>
+<statements>
+<ifStatement>
+<keyword> if </keyword>
+<symbol> ( </symbol>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> &lt; </symbol>
+<term>
+<integerConstant> 510 </integerConstant>
+</term>
+</expression>
+<symbol> ) </symbol>
+<symbol> { </symbol>
+<statements>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> false </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<letStatement>
+<keyword> let </keyword>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+<symbol> = </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<integerConstant> 2 </integerConstant>
+</term>
+</expression>
+<symbol> ; </symbol>
+</letStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> setColor </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<keyword> true </keyword>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+<doStatement>
+<keyword> do </keyword>
+<identifier> Screen </identifier>
+<symbol> . </symbol>
+<identifier> drawRectangle </identifier>
+<symbol> ( </symbol>
+<expressionList>
+<expression>
+<term>
+<symbol> ( </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> ) </symbol>
+</term>
+<symbol> - </symbol>
+<term>
+<integerConstant> 1 </integerConstant>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: x, kind: field, type: int, index: 0, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+<symbol> , </symbol>
+<expression>
+<term>
+<attribute>
+	(name: y, kind: field, type: int, index: 1, used)
+</attribute>
+</term>
+<symbol> + </symbol>
+<term>
+<attribute>
+	(name: size, kind: field, type: int, index: 2, used)
+</attribute>
+</term>
+</expression>
+</expressionList>
+<symbol> ) </symbol>
+<symbol> ; </symbol>
+</doStatement>
+</statements>
+<symbol> } </symbol>
+</ifStatement>
+<returnStatement>
+<keyword> return </keyword>
+<symbol> ; </symbol>
+</returnStatement>
+</statements>
+<symbol> } </symbol>
+</subroutineBody>
+</subroutineDec>
+<symbol> } </symbol>
+</class>

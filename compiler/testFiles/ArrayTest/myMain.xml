@@ -13,29 +13,33 @@
 <subroutineBody>
 <symbol> { </symbol>
 <varDec>
-<keyword> var </keyword>
-<identifier> Array </identifier>
-<identifier> a </identifier>
+<attribute>
+	(name: a, kind: var, type: Array, index: 0, defined)
+</attribute>
 <symbol> ; </symbol>
 </varDec>
 <varDec>
-<keyword> var </keyword>
-<keyword> int </keyword>
-<identifier> length </identifier>
+<attribute>
+	(name: length, kind: var, type: int, index: 1, defined)
+</attribute>
 <symbol> ; </symbol>
 </varDec>
 <varDec>
-<keyword> var </keyword>
-<keyword> int </keyword>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, defined)
+</attribute>
 <symbol> , </symbol>
-<identifier> sum </identifier>
+<attribute>
+	(name: sum, kind: var, type: int, index: 3, defined)
+</attribute>
 <symbol> ; </symbol>
 </varDec>
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> length </identifier>
+<attribute>
+	(name: length, kind: var, type: int, index: 1, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -57,7 +61,9 @@
 </letStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> a </identifier>
+<attribute>
+	(name: a, kind: var, type: Array, index: 0, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -68,7 +74,9 @@
 <expressionList>
 <expression>
 <term>
-<identifier> length </identifier>
+<attribute>
+	(name: length, kind: var, type: int, index: 1, used)
+</attribute>
 </term>
 </expression>
 </expressionList>
@@ -79,7 +87,9 @@
 </letStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -93,11 +103,15 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 </term>
 <symbol> &lt; </symbol>
 <term>
-<identifier> length </identifier>
+<attribute>
+	(name: length, kind: var, type: int, index: 1, used)
+</attribute>
 </term>
 </expression>
 <symbol> ) </symbol>
@@ -105,11 +119,15 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> a </identifier>
+<attribute>
+	(name: a, kind: var, type: Array, index: 0, used)
+</attribute>
 <symbol> [ </symbol>
 <expression>
 <term>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 </term>
 </expression>
 <symbol> ] </symbol>
@@ -134,11 +152,15 @@
 </letStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 </term>
 <symbol> + </symbol>
 <term>
@@ -152,7 +174,9 @@
 </whileStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -163,7 +187,9 @@
 </letStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> sum </identifier>
+<attribute>
+	(name: sum, kind: var, type: int, index: 3, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
@@ -177,11 +203,15 @@
 <symbol> ( </symbol>
 <expression>
 <term>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 </term>
 <symbol> &lt; </symbol>
 <term>
-<identifier> length </identifier>
+<attribute>
+	(name: length, kind: var, type: int, index: 1, used)
+</attribute>
 </term>
 </expression>
 <symbol> ) </symbol>
@@ -189,19 +219,27 @@
 <statements>
 <letStatement>
 <keyword> let </keyword>
-<identifier> sum </identifier>
+<attribute>
+	(name: sum, kind: var, type: int, index: 3, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> sum </identifier>
+<attribute>
+	(name: sum, kind: var, type: int, index: 3, used)
+</attribute>
 </term>
 <symbol> + </symbol>
 <term>
-<identifier> a </identifier>
+<attribute>
+	(name: a, kind: var, type: Array, index: 0, used)
+</attribute>
 <symbol> [ </symbol>
 <expression>
 <term>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 </term>
 </expression>
 <symbol> ] </symbol>
@@ -211,11 +249,15 @@
 </letStatement>
 <letStatement>
 <keyword> let </keyword>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 <symbol> = </symbol>
 <expression>
 <term>
-<identifier> i </identifier>
+<attribute>
+	(name: i, kind: var, type: int, index: 2, used)
+</attribute>
 </term>
 <symbol> + </symbol>
 <term>
@@ -252,11 +294,15 @@
 <expressionList>
 <expression>
 <term>
-<identifier> sum </identifier>
+<attribute>
+	(name: sum, kind: var, type: int, index: 3, used)
+</attribute>
 </term>
 <symbol> / </symbol>
 <term>
-<identifier> length </identifier>
+<attribute>
+	(name: length, kind: var, type: int, index: 1, used)
+</attribute>
 </term>
 </expression>
 </expressionList>

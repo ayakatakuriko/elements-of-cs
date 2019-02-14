@@ -11,6 +11,8 @@ public class CompilationEngine {
     private HashSet<String> opSet;
     private String preToken;
     private SymbolTable st;
+    private String type, name, className;
+    private int kind;
 
     public CompilationEngine(File input, File output) {
         st = new SymbolTable();
@@ -63,6 +65,7 @@ public class CompilationEngine {
         writeToken();
         /* class name*/
         jt.advance();
+        className = jt.identifier();
         writeToken();
         /* { */
         jt.advance();
@@ -90,22 +93,14 @@ public class CompilationEngine {
 
     public void compileClassVarDec() {
         writeCode("<classVarDec>\n");
-        /* static | field*/
-        writeToken();
-        /* type */
-        jt.advance();
-        writeToken();
-        /* var Name*/
-        jt.advance();
-        writeToken();
-
+        writeNotDefinedAttributes(false, false);
         jt.advance();
         while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
             /* , */
             writeToken();
             /* var Name*/
             jt.advance();
-            writeToken();
+            writeNotDefinedAttributes(false, true);
             jt.advance();
         }
         /* ; */
@@ -114,6 +109,7 @@ public class CompilationEngine {
     }
 
     public void compileSubroutine() {
+        st.startSubroutine(className);
         writeCode("<subroutineDec>\n");
         /* constructor | function | method */
         writeToken();
@@ -155,14 +151,7 @@ public class CompilationEngine {
 
     public void compileVarDec() {
         writeCode("<varDec>\n");
-        /* var */
-        writeToken();
-        /* type */
-        jt.advance();
-        writeToken();
-        /* varName */
-        jt.advance();
-        writeToken();
+        writeNotDefinedAttributes(false, false);
 
         jt.advance();
         while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
@@ -170,7 +159,7 @@ public class CompilationEngine {
             writeToken();
             /* var Name*/
             jt.advance();
-            writeToken();
+            writeNotDefinedAttributes(false, true);
             jt.advance();
         }
         /* ; */
@@ -211,11 +200,7 @@ public class CompilationEngine {
         if (jt.tokenType() == JackToknizer.KEYWORD ||
                 jt.tokenType() == JackToknizer.IDENTIFIER) {
 
-            /* type */
-            writeToken();
-            /* var Name */
-            jt.advance();
-            writeToken();
+            writeNotDefinedAttributes(true, false);
 
             jt.advance();
             while (jt.tokenType() == JackToknizer.SYMBOL && jt.symbol().equals(",")) {
@@ -223,10 +208,7 @@ public class CompilationEngine {
                 writeToken();
                 /* type */
                 jt.advance();
-                writeToken();
-                /* var name */
-                jt.advance();
-                writeToken();
+                writeNotDefinedAttributes(true, false);
                 jt.advance();
             }
         }
@@ -240,7 +222,10 @@ public class CompilationEngine {
 
         /* subroutineName | className | varName */
         jt.advance();
-        writeToken();
+        if (st.kindOf(jt.identifier()) == SymbolTable.NONE)
+            writeToken();
+        else
+            writeDefinedAttributes(jt.identifier(), false);
 
         jt.advance();
         if (jt.symbol().equals("(")) {
@@ -278,7 +263,7 @@ public class CompilationEngine {
         writeToken();
         /* varName */
         jt.advance();
-        writeToken();
+        writeDefinedAttributes(jt.identifier(), false);
 
         jt.advance();
         if (jt.tokenType() == JackToknizer.SYMBOL &&
@@ -410,7 +395,11 @@ public class CompilationEngine {
                 jt.advance();
                 break;
             case JackToknizer.KEYWORD:
-                writeToken();
+                if (jt.keyWord() == JackToknizer.THIS) {
+                    writeDefinedAttributes("this", false);
+                } else {
+                    writeToken();
+                }
                 jt.advance();
                 break;
             case JackToknizer.IDENTIFIER:
@@ -447,7 +436,7 @@ public class CompilationEngine {
                         break;
                     } else if (jt.symbol().equals("[")) {
                        /* varName [expression] */
-                        writeCode("<identifier> " + preToken + " </identifier>\n");
+                        writeDefinedAttributes(preToken, false);
                         /* [ */
                         writeToken();
                         jt.advance();
@@ -459,7 +448,7 @@ public class CompilationEngine {
                     }
                 }
                 /* varName */
-                    writeCode("<identifier> " + preToken + " </identifier>\n");
+                writeDefinedAttributes(preToken, false);
         }
         writeCode("</term>\n");
     }
@@ -541,14 +530,23 @@ public class CompilationEngine {
                 return;
         }
 
-        writeCode("<attribute>\n\t(kind: " + kind + "type: " +
+        writeCode("<attribute>\n\t(name: " + name + ", kind: " + kind + ", type: " +
                 st.typeOf(name) + ", index: " +
                 st.indexOf(name) + ", "+ stat +")\n</attribute>\n");
     }
 
-    private void writeNotDefinedAttributes(boolean isArg) {
-        String type, name;
-        int kind;
+    /*
+    * isSameAsBeforeがtrueなら、type, kindeが1つ前のものと同じ状態で登録される
+    * トークナイザは識別しを読み込んだ状態で止まる
+    * */
+    private void writeNotDefinedAttributes(boolean isArg, boolean isSameAsBefore) {
+        if (isSameAsBefore) {
+            /* name*/
+            name = jt.identifier();
+            st.define(name, type, kind);
+            writeDefinedAttributes(name, true);
+            return;
+        }
 
         if (isArg) kind = SymbolTable.ARG;
         else {

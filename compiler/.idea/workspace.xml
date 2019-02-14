@@ -60,8 +60,8 @@
       <file leaf-file-name="SymbolTable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
+            <state relative-caret-position="450">
+              <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -69,8 +69,20 @@
       <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="524" column="32" selection-start-line="524" selection-start-column="32" selection-end-line="524" selection-end-column="32" />
+            <state relative-caret-position="198">
+              <caret line="227" column="57" selection-start-line="227" selection-start-column="57" selection-end-line="227" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestCompilationEngine.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="846">
+              <caret line="62" column="12" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,9 +119,9 @@
         <option value="$PROJECT_DIR$/src/JackToknizer.java" />
         <option value="$PROJECT_DIR$/src/JackAnalyzer.java" />
         <option value="$PROJECT_DIR$/test/TestSynbolTable.java" />
-        <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/test/TestSymbolTable.java" />
         <option value="$PROJECT_DIR$/src/VMWriter.java" />
+        <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/CompilationEngine.java" />
       </list>
     </option>
@@ -179,7 +191,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestSymbolTable.Test">
+  <component name="RunManager" selected="JUnit.TestCompilationEngine.testArrayTest">
     <configuration name="JackAnalyzer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="JackAnalyzer" />
       <module name="compiler" />
@@ -206,13 +218,13 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TestCompilationEngine.testExpressionLessSquare" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestCompilationEngine.testArrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compiler" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestCompilationEngine" />
-      <option name="METHOD_NAME" value="testExpressionLessSquare" />
+      <option name="METHOD_NAME" value="testArrayTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -298,17 +310,17 @@
     <list>
       <item itemvalue="Application.JackAnalyzer" />
       <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
-      <item itemvalue="JUnit.TestCompilationEngine.testExpressionLessSquare" />
       <item itemvalue="JUnit.TestCompilationEngine" />
       <item itemvalue="JUnit.TestSymbolTable.Test" />
+      <item itemvalue="JUnit.TestCompilationEngine.testArrayTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestCompilationEngine.testArrayTest" />
+        <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
         <item itemvalue="JUnit.TestSymbolTable.Test" />
         <item itemvalue="Application.JackAnalyzer" />
-        <item itemvalue="JUnit.TestCompilationEngine.testSquare" />
         <item itemvalue="JUnit.TestCompilationEngine" />
-        <item itemvalue="JUnit.TestCompilationEngine.testExpressionLessSquare" />
       </list>
     </recent_temporary>
   </component>
@@ -326,18 +338,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 19h 59m 52s.xml">
-      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 00m 30s.xml">
-      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 04m 10s.xml">
-      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 07m 02s.xml">
-      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 07m 32s.xml">
       <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
     </history-entry>
@@ -356,6 +356,18 @@
     <history-entry file="TestSymbolTable_Test - 2019.02.13 at 18h 50m 37s.xml">
       <configuration name="TestSymbolTable.Test" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 17m 28s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 19m 13s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 23m 55s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 33m 38s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -363,15 +375,16 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2576687" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.06595092" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.26993865" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.115030676" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16868381" />
@@ -387,7 +400,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297546" />
-      <window_info anchor="bottom" id="Messages" order="7" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="6" />
@@ -432,12 +444,6 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
-          <line>222</line>
-          <properties />
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/TestCompilationEngine.java</url>
           <line>40</line>
           <properties />
@@ -450,7 +456,7 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="50" />
+      <option name="time" value="52" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -673,16 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="2" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/VMWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1116">
@@ -712,15 +708,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
+        <state relative-caret-position="450">
+          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="62" column="12" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="524" column="32" selection-start-line="524" selection-start-column="32" selection-end-line="524" selection-end-column="32" />
+        <state relative-caret-position="198">
+          <caret line="227" column="57" selection-start-line="227" selection-start-column="57" selection-end-line="227" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
