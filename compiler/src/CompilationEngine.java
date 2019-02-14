@@ -118,10 +118,14 @@ public class CompilationEngine {
         jt.advance();
         /* paramList */
         jt.advance();
-        if (kindOfSubroutine == JackToknizer.METHOD) nArgs++;
+        if (kindOfSubroutine == JackToknizer.METHOD) {
+            nArgs++;
+            st.define("this", className, SymbolTable.ARG);
+        }
         compileParameterList();
         /* Add function and number of args to map*/
-        funcMap.put(funcName, kindOfSubroutine);
+        if (!funcMap.containsKey(funcName))
+            funcMap.put(funcName, kindOfSubroutine);
         /* ) */
         /* { */
         jt.advance();
@@ -134,7 +138,8 @@ public class CompilationEngine {
         }
         vm.writeFunction(className + "." + funcName, nLocals);
         if (kindOfSubroutine == JackToknizer.CONSTRUCTOR) {
-            writeCode("push constant " + nLocals + "\n" +
+            int fields = st.varCount(SymbolTable.FIELD);
+            writeCode("push constant " + fields + "\n" +
                     "call Memory.alloc 1\npop pointer 0\n");
         } else if (kindOfSubroutine == JackToknizer.METHOD) {
             writeCode("push argument 0\npop pointer 0\n");
@@ -212,11 +217,12 @@ public class CompilationEngine {
         caller = jt.identifier();
         jt.advance();
         if (jt.symbol().equals("(")) {
-            /*同一クラス内の関数を実行*/
-            if (funcMap.get(caller) == JackToknizer.METHOD) {
-                vm.writePush(VMWriter.POINTER, 0);
-                nArgs++;
+            /*同一クラス内の関数を実行（この時点でメソッドが確定）*/
+            if (!funcMap.containsKey(caller)) {
+                funcMap.put(caller, JackToknizer.METHOD);
             }
+            vm.writePush(VMWriter.POINTER, 0);
+            nArgs++;
             /* ( */
             jt.advance();
             compileExpressionList();
@@ -234,8 +240,11 @@ public class CompilationEngine {
                         vm.writePush(VMWriter.STATIC, st.indexOf(caller));
                         break;
                     case SymbolTable.VAR:
-                    case SymbolTable.FIELD:
                         vm.writePush(VMWriter.LOCAL, st.indexOf(caller));
+                        break;
+                    case SymbolTable.FIELD:
+                        vm.writePush(VMWriter.THIS, st.indexOf(caller));
+                        break;
                 }
             }
             /* . */
@@ -246,10 +255,11 @@ public class CompilationEngine {
             jt.advance();
             jt.advance();
             compileExpressionList();
-            vm.writeCall(caller + "." + subroutine, nArgs);
+            vm.writeCall(((st.kindOf(caller) == SymbolTable.NONE) ?
+                    caller : st.typeOf(caller)) + "." + subroutine, nArgs);
             /* ) */
         }
-
+        vm.writePop(VMWriter.TEMP, 0);
         /* ; */
         jt.advance();
     }
@@ -288,8 +298,11 @@ public class CompilationEngine {
                     vm.writePush(VMWriter.STATIC, st.indexOf(assigned));
                     break;
                 case SymbolTable.VAR:
-                case SymbolTable.FIELD:
                     vm.writePush(VMWriter.LOCAL, st.indexOf(assigned));
+                    break;
+                case SymbolTable.FIELD:
+                    vm.writePush(VMWriter.THIS, st.indexOf(assigned));
+                    break;
             }
 
             vm.writeArithmetic(VMWriter.ADD);
@@ -304,8 +317,11 @@ public class CompilationEngine {
                     vm.writePop(VMWriter.STATIC, st.indexOf(assigned));
                     break;
                 case SymbolTable.VAR:
-                case SymbolTable.FIELD:
                     vm.writePop(VMWriter.LOCAL, st.indexOf(assigned));
+                    break;
+                case SymbolTable.FIELD:
+                    vm.writePop(VMWriter.THIS, st.indexOf(assigned));
+                    break;
             }
         }
         /* ; */
@@ -351,16 +367,15 @@ public class CompilationEngine {
         jt.advance();
         jt.advance();
         compileExpression();
-        vm.writeArithmetic(VMWriter.NOT);
         /* ) */
         /* { */
         jt.advance();
         jt.advance();
-        vm.writeIf("IF" + label);
+        vm.writeIf("IF_TRUE" + label);
+        vm.writeGoto("IF_FALSE" + label);
+        vm.writeLabel("IF_TRUE" + label);
         compileStatements();
         /* } */
-        vm.writeGoto("ELSE" + label);
-        vm.writeLabel("IF" + label);
         jt.advance();
         if (jt.tokenType() == JackToknizer.KEYWORD && jt.keyWord() == JackToknizer.ELSE) {
             /* else */
@@ -371,7 +386,7 @@ public class CompilationEngine {
             /* } */
             jt.advance();
         }
-        vm.writeLabel("ELSE" + label);
+        vm.writeLabel("IF_FALSE" + label);
     }
 
     public void compileExpression() {
@@ -479,10 +494,12 @@ public class CompilationEngine {
                 if (jt.symbol().equals("(")) {
                     nArgs = 0;
                     /*同一クラス内の関数を実行*/
-                    if (funcMap.get(pre) == JackToknizer.METHOD) {
-                        vm.writePush(VMWriter.POINTER, 0);
-                        nArgs++;
+                    if (!funcMap.containsKey(pre)) {
+                        funcMap.put(pre, JackToknizer.METHOD);
                     }
+                    vm.writePush(VMWriter.POINTER, 0);
+                    nArgs++;
+
                     /* ( */
                     jt.advance();
                     compileExpressionList();
@@ -501,8 +518,11 @@ public class CompilationEngine {
                                 vm.writePush(VMWriter.STATIC, st.indexOf(pre));
                                 break;
                             case SymbolTable.VAR:
-                            case SymbolTable.FIELD:
                                 vm.writePush(VMWriter.LOCAL, st.indexOf(pre));
+                                break;
+                            case SymbolTable.FIELD:
+                                vm.writePush(VMWriter.THIS, st.indexOf(pre));
+                                break;
                         }
                     }
                     /* . */
@@ -513,7 +533,8 @@ public class CompilationEngine {
                     jt.advance();
                     jt.advance();
                     compileExpressionList();
-                    vm.writeCall(pre + "." + subroutine, nArgs);
+                    vm.writeCall(((st.kindOf(pre) == SymbolTable.NONE) ?
+                            pre : st.typeOf(pre)) + "." + subroutine, nArgs);
                     /* ) */
                     jt.advance();
                 } else if (jt.symbol().equals("[")) {
@@ -526,8 +547,11 @@ public class CompilationEngine {
                             vm.writePush(VMWriter.STATIC, st.indexOf(pre));
                             break;
                         case SymbolTable.VAR:
-                        case SymbolTable.FIELD:
                             vm.writePush(VMWriter.LOCAL, st.indexOf(pre));
+                            break;
+                        case SymbolTable.FIELD:
+                            vm.writePush(VMWriter.THIS, st.indexOf(pre));
+                            break;
                     }
                     /* [ */
                     jt.advance();
@@ -548,8 +572,11 @@ public class CompilationEngine {
                             vm.writePush(VMWriter.STATIC, st.indexOf(pre));
                             break;
                         case SymbolTable.VAR:
-                        case SymbolTable.FIELD:
                             vm.writePush(VMWriter.LOCAL, st.indexOf(pre));
+                            break;
+                        case SymbolTable.FIELD:
+                            vm.writePush(VMWriter.THIS, st.indexOf(pre));
+                            break;
                     }
                 }
         }
@@ -568,31 +595,6 @@ public class CompilationEngine {
         }
     }
 
-    private void writeToken() {
-
-        switch (jt.tokenType()) {
-            case JackToknizer.KEYWORD:
-                writeCode("<keyword> " + keywordMap.get(jt.keyWord()) + " </keyword>\n");
-                break;
-            case JackToknizer.SYMBOL:
-                writeCode("<symbol> " +
-                        ((jt.symbol().equals("<")) ? "&lt;" :
-                                (jt.symbol().equals(">")) ? "&gt;" :
-                                        (jt.symbol().equals("&")) ? "&amp;" : jt.symbol())
-                        + " </symbol>\n");
-                break;
-            case JackToknizer.IDENTIFIER:
-                writeCode("<identifier> " + jt.identifier() + " </identifier>\n");
-                break;
-            case JackToknizer.INT_CONST:
-                writeCode("<integerConstant> " + jt.intVal() + " </integerConstant>\n");
-                break;
-            case JackToknizer.STRING_CONST:
-                writeCode("<stringConstant> " + jt.stringVal() + " </stringConstant>\n");
-                break;
-        }
-    }
-
     public void closeOutput() {
         try {
             writer.close();
@@ -607,75 +609,6 @@ public class CompilationEngine {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /* シンボルテーブルにすでに登録されたものを書く。
-     * トークナイザは進まない*/
-    private void writeDefinedAttributes(String name, boolean isVar) {
-        String kind;
-        String stat = (isVar) ? "defined" : "used";
-
-        switch (st.kindOf(name)) {
-            case SymbolTable.STATIC:
-                kind = "static";
-                break;
-            case SymbolTable.ARG:
-                kind = "arg";
-                break;
-            case SymbolTable.FIELD:
-                kind = "field";
-                break;
-            case SymbolTable.VAR:
-                kind = "var";
-                break;
-            default:
-                return;
-        }
-
-        writeCode("<attribute>\n\t(name: " + name + ", kind: " + kind + ", type: " +
-                st.typeOf(name) + ", index: " +
-                st.indexOf(name) + ", " + stat + ")\n</attribute>\n");
-    }
-
-    /*
-     * isSameAsBeforeがtrueなら、type, kindeが1つ前のものと同じ状態で登録される
-     * トークナイザは識別しを読み込んだ状態で止まる
-     * */
-    private void writeNotDefinedAttributes(boolean isArg, boolean isSameAsBefore) {
-        if (isSameAsBefore) {
-            /* name*/
-            name = jt.identifier();
-            st.define(name, type, kind);
-            writeDefinedAttributes(name, true);
-            return;
-        }
-
-        if (isArg) kind = SymbolTable.ARG;
-        else {
-            switch (jt.keyWord()) {
-                case JackToknizer.FIELD:
-                    kind = SymbolTable.FIELD;
-                    break;
-                case JackToknizer.STATIC:
-                    kind = SymbolTable.STATIC;
-                    break;
-                case JackToknizer.VAR:
-                    kind = SymbolTable.VAR;
-                    break;
-                default:
-                    writeCode("<ERROR> writeNotDefinedAttributes </ERROR>\n");
-                    return;
-            }
-            jt.advance();
-        }
-        /* type */
-        type = (jt.tokenType() == JackToknizer.KEYWORD) ?
-                keywordMap.get(jt.keyWord()) : jt.identifier();
-        jt.advance();
-        /* name*/
-        name = jt.identifier();
-        st.define(name, type, kind);
-        writeDefinedAttributes(name, true);
     }
 
     private void define(boolean isArg, boolean isSameAsBefore) {
@@ -712,14 +645,5 @@ public class CompilationEngine {
         st.define(name, type, kind);
     }
 
-    private class SubroutineData {
-        private int args;
-        private int type;
-
-        public SubroutineData(int args, int type) {
-            this.args = args;
-            this.type = type;
-        }
-    }
 }
 

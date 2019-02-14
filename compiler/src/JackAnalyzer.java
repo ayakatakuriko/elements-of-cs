@@ -30,7 +30,7 @@ public class JackAnalyzer {
     public void execute() {
         while (index < files.size()) {
             input = new File(files.get(index));
-            output = new File(files.get(index).replaceFirst("(?s)(.*)jack", "$1xml"));
+            output = new File(files.get(index).replaceFirst("(?s)(.*)jack", "$1vm"));
             ce = new CompilationEngine(input, output);
             ce.compileClass();
             ce.closeOutput();

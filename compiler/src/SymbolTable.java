@@ -41,7 +41,6 @@ public class SymbolTable {
         subroutineTable = new LinkedList<>();
         argIndex = -1;
         varIndex = -1;
-        this.define("this", className, ARG);
     }
 
     public void define(String name, String type, int kind) {
