@@ -13,10 +13,12 @@ public class CompilationEngine {
     private SymbolTable st;
     private String type, name, className;
     private int kind;
+    private VMWriter vm;
 
     public CompilationEngine(File input, File output) {
         st = new SymbolTable();
         jt = new JackToknizer(input);
+        vm = new VMWriter(output);
         preToken = null;
         try {
             writer = new FileWriter(output, true);

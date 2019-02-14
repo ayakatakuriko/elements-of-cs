@@ -48,11 +48,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VMWriter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="VMWriter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/VMWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1116">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="258">
+              <caret line="98" column="17" lean-forward="true" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="227" column="57" selection-start-line="227" selection-start-column="57" selection-end-line="227" selection-end-column="57" />
+            <state relative-caret-position="240">
+              <caret line="503" selection-start-line="503" selection-end-line="509" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -120,9 +123,9 @@
         <option value="$PROJECT_DIR$/src/JackAnalyzer.java" />
         <option value="$PROJECT_DIR$/test/TestSynbolTable.java" />
         <option value="$PROJECT_DIR$/test/TestSymbolTable.java" />
-        <option value="$PROJECT_DIR$/src/VMWriter.java" />
         <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/CompilationEngine.java" />
+        <option value="$PROJECT_DIR$/src/VMWriter.java" />
       </list>
     </option>
   </component>
@@ -338,15 +341,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 07m 32s.xml">
-      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestCompilationEngine_testExpressionLessSquare - 2019.02.12 at 20h 11m 23s.xml">
-      <configuration name="TestCompilationEngine.testExpressionLessSquare" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestCompilationEngine - 2019.02.12 at 20h 16m 22s.xml">
-      <configuration name="TestCompilationEngine" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestCompilationEngine_testSquare - 2019.02.12 at 20h 41m 58s.xml">
       <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
     </history-entry>
@@ -368,6 +362,15 @@
     <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 33m 38s.xml">
       <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 39m 29s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testSquare - 2019.02.14 at 11h 40m 59s.xml">
+      <configuration name="TestCompilationEngine.testSquare" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestCompilationEngine_testArrayTest - 2019.02.14 at 11h 41m 22s.xml">
+      <configuration name="TestCompilationEngine.testArrayTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -382,9 +385,9 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.06595092" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.06595092" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.115030676" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.056748465" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16868381" />
@@ -494,6 +497,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
           <caret line="64" selection-start-line="64" selection-end-line="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -679,13 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/VMWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1116">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -706,13 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/TestCompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="846">
@@ -723,10 +715,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="227" column="57" selection-start-line="227" selection-start-column="57" selection-end-line="227" selection-end-column="57" />
+        <state relative-caret-position="240">
+          <caret line="503" selection-start-line="503" selection-end-line="509" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VMWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="98" column="17" lean-forward="true" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
