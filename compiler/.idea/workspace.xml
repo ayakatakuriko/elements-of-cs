@@ -12,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JackToknizer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JackToknizer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="194" selection-start-line="194" selection-end-line="194" />
+            <state relative-caret-position="276">
+              <caret line="173" column="46" selection-start-line="173" selection-start-column="46" selection-end-line="173" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -27,8 +27,8 @@
       <file leaf-file-name="JackAnalyzer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="194">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CompilationEngine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="138" column="53" selection-start-line="138" selection-start-column="53" selection-end-line="138" selection-end-column="60" />
+            <state relative-caret-position="32">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -135,7 +135,6 @@
       <list>
         <option value="$PROJECT_DIR$/testFiles/testCode1.jack" />
         <option value="$PROJECT_DIR$/test/TestToknizer.java" />
-        <option value="$PROJECT_DIR$/src/JackToknizer.java" />
         <option value="$PROJECT_DIR$/test/TestSynbolTable.java" />
         <option value="$PROJECT_DIR$/test/TestSymbolTable.java" />
         <option value="$PROJECT_DIR$/src/VMWriter.java" />
@@ -143,6 +142,7 @@
         <option value="$PROJECT_DIR$/src/JackAnalyzer.java" />
         <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/CompilationEngine.java" />
+        <option value="$PROJECT_DIR$/src/JackToknizer.java" />
       </list>
     </option>
   </component>
@@ -402,19 +402,19 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.04754601" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.13190185" />
       <window_info anchor="bottom" id="Style Checker" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.26226994" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3500785" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.3494705" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297546" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3608087" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.035276074" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -471,41 +471,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
-          <line>146</line>
-          <properties />
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
           <line>86</line>
           <properties />
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/CompilationEngine.java</url>
-          <line>138</line>
+          <url>file://$PROJECT_DIR$/src/JackAnalyzer.java</url>
+          <line>42</line>
           <properties />
-          <option name="timeStamp" value="70" />
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="71" />
+      <option name="time" value="72" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="jt.token" language="JAVA" />
         <watch expression="nArgs" language="JAVA" />
       </configuration>
+      <configuration name="Application">
+        <watch expression="jt.token" language="JAVA" />
+      </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>nArgs</expression-string>
+        <expression-string>jt.token</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>jt.token</expression-string>
+        <expression-string>nArgs</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -782,26 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="194" selection-start-line="194" selection-end-line="194" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -811,8 +788,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CompilationEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="138" column="53" selection-start-line="138" selection-start-column="53" selection-end-line="138" selection-end-column="60" />
+        <state relative-caret-position="32">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JackAnalyzer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JackToknizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="173" column="46" selection-start-line="173" selection-start-column="46" selection-end-line="173" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
