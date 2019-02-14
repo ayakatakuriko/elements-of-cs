@@ -277,19 +277,6 @@ public class CompilationEngine {
                 jt.symbol().equals("[")) {
             jt.advance();
             compileExpression();
-            /* インデックスをtemp0に退避*/
-            vm.writePop(VMWriter.TEMP, 0);
-            /* ] */
-            jt.advance();
-            isArray = true;
-        }
-        /* = */
-        jt.advance();
-        compileExpression();
-
-        if (isArray) {
-            vm.writePush(VMWriter.TEMP, 0);
-
             switch (st.kindOf(assigned)) {
                 case SymbolTable.ARG:
                     vm.writePush(VMWriter.ARG, st.indexOf(assigned));
@@ -304,9 +291,19 @@ public class CompilationEngine {
                     vm.writePush(VMWriter.THIS, st.indexOf(assigned));
                     break;
             }
-
             vm.writeArithmetic(VMWriter.ADD);
+            /* ] */
+            jt.advance();
+            isArray = true;
+        }
+        /* = */
+        jt.advance();
+        compileExpression();
+
+        if (isArray) {
+            vm.writePop(VMWriter.TEMP, 0);
             vm.writePop(VMWriter.POINTER, 1);
+            vm.writePush(VMWriter.TEMP, 0);
             vm.writePop(VMWriter.THAT, 0);
         } else {
             switch (st.kindOf(assigned)) {
@@ -379,14 +376,18 @@ public class CompilationEngine {
         jt.advance();
         if (jt.tokenType() == JackToknizer.KEYWORD && jt.keyWord() == JackToknizer.ELSE) {
             /* else */
+            vm.writeGoto("IF_END" + label);
+            vm.writeLabel("IF_FALSE" + label);
             /* { */
             jt.advance();
             jt.advance();
             compileStatements();
             /* } */
             jt.advance();
+            vm.writeLabel("IF_END" + label);
+        } else {
+            vm.writeLabel("IF_FALSE" + label);
         }
-        vm.writeLabel("IF_FALSE" + label);
     }
 
     public void compileExpression() {
