@@ -26,6 +26,7 @@ class Output {
       let row = 0;
       let col = 0;
       let SCREEN = 16384;
+      do Output.initMap();
       return;
     }
 
@@ -194,11 +195,17 @@ class Output {
      *  and advances the cursor one column forward. */
     function void printChar(char c) {
       var Array cArray;
-      var int index;
+      var int index, param;
       let cArray = Output.getMap(c);
       let index = 0;
+      let param = col - ((col / 2) * 2); // colが偶数ならparam=0
+      if (param = 1) {
+        let param = 2*2*2*2*2*2*2*2;
+      } else {
+        let param = 1;
+      }
       while (index < 11) {
-        let SCREEN[((index + (row * 11)) * 32) + ((col * 8) / 16)] = cArray[index];
+        let SCREEN[((index + (row * 11)) * 32) + ((col * 8) / 16)] = (param * cArray[index]) | SCREEN[((index + (row * 11)) * 32) + ((col * 8) / 16)];
         let index = index + 1;
       }
       if (col = 63) {
@@ -223,7 +230,7 @@ class Output {
       let len = s.length();
       let i = 0;
       while (i < len) {
-        do Output.printChar(s[i]);
+        do Output.printChar(s.charAt(i));
         let i = i + 1;
       }
       return;
@@ -232,22 +239,34 @@ class Output {
     /** Displays the given integer starting at the cursor location,
      *  and advances the cursor appropriately. */
     function void printInt(int i) {
-      var Array integer;
-      let integer = Array.new(6);
-      do Output.printString(integer.setInt(i));
+      var String integer;
+      let integer = String.new(7);
+      do integer.setInt(i);
+      do Output.printString(integer);
       do integer.dispose();
       return;
     }
 
     /** Advances the cursor to the beginning of the next line. */
     function void println() {
-      do Output.printChar(String.newline());
+      // 次の行へ
+      if (row = 22) {
+        //一番上の行に戻る
+        let row = 0;
+      } else {
+        let row = row + 1;
+      }
+      let col = 0;
       return;
     }
 
     /** Moves the cursor one column back. */
     function void backSpace() {
-      do Output.printChar(String.backSpace());
+      if (col = 0) {
+        let col = 0;
+      } else {
+        let col = col - 1;
+      }
       return;
     }
 }

@@ -46,7 +46,6 @@ class Keyboard {
      */
     function char readChar() {
       var char c;
-      do Output.printChar(0); // カーソルを表示
       while (Keyboard.keyPressed() = 0) {
         // キーが押されるまで待機
       }
@@ -66,19 +65,18 @@ class Keyboard {
      * and returns its value. Also handles user backspaces.
      */
     function String readLine(String message) {
-      var Array s;
+      var String s;
       var char c;
-      let s = Array.new(64);
+      let s = String.new(64);
       do Output.printString(message);
       while (true) {
         let c = Keyboard.readChar();
-        if (c = String.newline()) {
+        if (c = String.newLine()) {
           do Output.println();
           return s;
         } else {
           if (c = String.backSpace()) {
             do s. eraseLastChar();
-            do Output.backSpace();
             do Output.backSpace();
             do Output.printChar(0);
           } else {
@@ -96,19 +94,18 @@ class Keyboard {
      * entered text is detected). Also handles user backspaces.
      */
     function int readInt(String message) {
-    var Array s;
+    var String s;
     var char c;
-    let s = Array.new(64);
+    let s = String.new(64);
     do Output.printString(message);
     while (true) {
       let c = Keyboard.readChar();
-      if (c = String.newline()) {
+      if (c = String.newLine()) {
         do Output.println();
         return s.intValue();
       } else {
         if (c = String.backSpace()) {
           do s. eraseLastChar();
-          do Output.backSpace();
           do Output.backSpace();
           do Output.printChar(0);
         } else {

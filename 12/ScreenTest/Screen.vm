@@ -32,7 +32,8 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 16384
 pop static 0
-push constant 1
+push constant 0
+not
 pop static 1
 push constant 0
 return
@@ -84,39 +85,43 @@ push argument 0
 pop static 1
 push constant 0
 return
-function Screen.drawPixel 1
-push argument 1
-push argument 1
+function Screen.drawPixel 2
+push argument 0
+push argument 0
 push constant 16
 call Math.divide 2
 push constant 16
 call Math.multiply 2
 sub
 pop local 0
+push static 0
+push argument 1
+push constant 32
+call Math.multiply 2
+add
+push argument 0
+push constant 16
+call Math.divide 2
+add
+call Memory.peek 1
+pop local 1
 push static 1
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push static 0
-push argument 0
+push argument 1
 push constant 32
 call Math.multiply 2
 add
-push argument 1
-push constant 16
-call Math.divide 2
-add
-push static 0
 push argument 0
-push constant 32
-call Math.multiply 2
-add
-push argument 1
 push constant 16
 call Math.divide 2
 add
-call Memory.peek 1
+push local 1
+push constant 15
 push local 0
+sub
 push static 2
 add
 pop pointer 1
@@ -127,25 +132,18 @@ pop temp 0
 goto IF_END0
 label IF_FALSE0
 push static 0
-push argument 0
+push argument 1
 push constant 32
 call Math.multiply 2
 add
-push argument 1
-push constant 16
-call Math.divide 2
-add
-push static 0
 push argument 0
-push constant 32
-call Math.multiply 2
-add
-push argument 1
 push constant 16
 call Math.divide 2
 add
-call Memory.peek 1
+push local 1
+push constant 15
 push local 0
+sub
 push static 2
 add
 pop pointer 1
