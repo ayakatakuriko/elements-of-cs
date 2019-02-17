@@ -19,13 +19,18 @@ class String {
     constructor String new(int maxLength) {
         let maxLen = maxLength ;
         let length = 0;
-        let str = Memory.alloc(maxLength);
+        if (~(maxLen = 0)) {
+          let str = Memory.alloc(maxLen);
+        }
         return this;
     }
 
     /** Disposes this string. */
     method void dispose() {
-      do Memory.deAlloc(maxLen);
+    if (~(maxLen = 0)) {
+      do Memory.deAlloc(str);
+    }
+      do Memory.deAlloc(this);
       return;
     }
 
@@ -69,39 +74,59 @@ class String {
 
       let i = 0;
       let ans = 0;
-      while ((i < maxLen) & (str[i] > 47) & (str[i] < 58)) {
-        let ans = ans * 10;
-        let ans = str[i] - 48;
+      if (str[i] = 45) {
+       // 負の値
+       let i = i + 1;
       }
+      while ((i < length) & (str[i] > 47) & (str[i] < 58)) {
+        let ans = ans * 10;
+        let ans = (str[i] - 48) + ans;
+        let i = i + 1;
+      }
+      if (str[0] = 45) {
+       // 負の値
+       return -ans;
+      } else {
       return ans;
+      }
     }
 
     /** Sets this string to hold a representation of the given value. */
     method void setInt(int val) {
-      var int i;
-      var Array temp;
+      var int i, digit;
       var int ten, num;
-      let temp = Array.new(maxLen);
       let i = 0;
       let ten = 10;
       let num = Math.abs(val);
 
-      while (~(num < ten)) {
-        let ten = ten * 10;
+      if (num < ten) {
+        let digit = 1;
+        let ten = 1;
+      } else {
+        let digit = 2;
+        while ((~(num < ten)) & (digit < 5)) {
+          let ten = ten * 10;
+          let digit = digit + 1;
+          }
+          if (num < ten) {
+            let ten = ten / 10;
+            let digit = digit - 1;
+          }
       }
 
       if (val < 0) {
         let str[0] = 45; // -
+        let digit = digit + 1;
         let i = i + 1;
       }
 
-      while (ten > 1) {
-        let ten = ten / 10;
+      while (i < digit) {
         let str[i] = (num / ten) + 48;
         let num = num - ((num / ten) * ten);
         let i = i + 1;
+        let ten = ten / 10;
       }
-
+      let length = digit;
       return;
     }
 

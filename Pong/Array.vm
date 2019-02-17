@@ -1,17 +1,8 @@
-function Array.new 0
-push argument 0
-push constant 0
-gt
-not
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 2
-call Sys.error 1
-pop temp 0
-label IF_FALSE0
+function Array.new 1
 push argument 0
 call Memory.alloc 1
+pop local 0
+push local 0
 return
 function Array.dispose 0
 push argument 0

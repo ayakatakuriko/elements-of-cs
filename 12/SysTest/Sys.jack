@@ -15,6 +15,8 @@ class Sys {
       do Screen.init();
       do Keyboard.init();
       do Memory.init();
+      do Main.main();
+      do Sys.halt();
       return;
     }
 
@@ -31,7 +33,7 @@ class Sys {
 
       while (i < duration) {
             let msec = 0;
-        while(msec < 32000) {
+        while(msec < 90) {
           let msec = msec + 1;
         }
         let i = i + 1;

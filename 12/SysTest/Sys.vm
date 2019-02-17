@@ -9,6 +9,10 @@ call Keyboard.init 0
 pop temp 0
 call Memory.init 0
 pop temp 0
+call Main.main 0
+pop temp 0
+call Sys.halt 0
+pop temp 0
 push constant 0
 return
 function Sys.halt 0
@@ -34,7 +38,7 @@ push constant 0
 pop local 0
 label WHILE_EXP1
 push local 0
-push constant 32000
+push constant 90
 lt
 not
 if-goto WHILE_END1
